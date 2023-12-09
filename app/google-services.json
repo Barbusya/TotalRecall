@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "516961312113",
+    "project_id": "totalrecall-31235",
+    "storage_bucket": "totalrecall-31235.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516961312113:android:65fd02c569a7a46bedaad0",
+        "android_client_info": {
+          "package_name": "com.bbbrrr8877.totalrecall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ3X67w2i3OWNU85ntDxyEMJyez9eqz4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
