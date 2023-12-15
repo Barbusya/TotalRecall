@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TotalRecall</string>
     <string name="your_web_client_id">516961312113-8h88j5jb0d6ca5cirhe3h9n85cno37ed.apps.googleusercontent.com</string>
+    <string name="my_email">My name: \n%s \n\n My email:\n%s</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="sign_out">sign out</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
 </resources>
