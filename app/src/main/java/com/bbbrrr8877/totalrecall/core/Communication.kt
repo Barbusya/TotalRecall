@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
 
-interface Communication<T : Any> {
+interface Communication {
 
-    interface Update<T : Any> {
-        fun map(source: T)
-    }
+    interface Update<T : Any> : Mapper.Unit<T>
 
     interface Observe<T : Any> {
         fun observe(owner: LifecycleOwner, observer: Observer<T>) = Unit
@@ -22,8 +20,8 @@ interface Communication<T : Any> {
         private val liveData: MutableLiveData<T> = SingleLiveEvent()
     ) : Mutable<T> {
 
-        override fun map(source: T) {
-            liveData.value = source
+        override fun map(data: T) {
+            liveData.value = data
         }
 
         override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
