@@ -4,7 +4,6 @@ import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.ManageResource
 import com.bbbrrr8877.totalrecall.login.data.LoginRepository
 import com.bbbrrr8877.totalrecall.login.data.LoginResult
-import com.bbbrrr8877.totalrecall.main.FakeNavigationCommunication
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.main.Screen
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
