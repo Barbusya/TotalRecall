@@ -3,6 +3,7 @@ package com.bbbrrr8877.totalrecall.core
 import android.content.Context
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.google.firebase.FirebaseApp
+import com.google.gson.Gson
 
 class Core(context: Context) : ProvideNavigation, ProvideStorage, ProvideManageResource,
     ProvideDispatchersList, ProvideDatabase {
@@ -14,8 +15,11 @@ class Core(context: Context) : ProvideNavigation, ProvideStorage, ProvideManageR
     private val provideDatabase = ProvideDatabase.Base()
     private val manageResource = ManageResource.Base(context)
     private val navigation = NavigationCommunication.Base()
-    private val storage =
-        Storage.Base(context.getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE))
+    private val storage = SimpleStorage.Base(
+        context.getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE)
+    ).let { simpleStorage ->
+        Storage.Base(simpleStorage, ObjectStorage.Base(simpleStorage, Gson()))
+    }
     private val dispatchersList = DispatchersList.Base()
 
     override fun provideDispatchersList() = dispatchersList

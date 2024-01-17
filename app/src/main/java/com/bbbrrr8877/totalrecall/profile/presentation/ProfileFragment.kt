@@ -25,4 +25,5 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(R.layout.fragment_profile
         viewModel.init(savedInstanceState == null)
     }
 
+
 }

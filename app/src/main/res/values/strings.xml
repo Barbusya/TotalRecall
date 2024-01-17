@@ -6,4 +6,10 @@
     <string name="sign_out">sign out</string>
     <string name="profile">Profile</string>
     <string name="login">Login</string>
+    <string name="add_new_topic_description">Add new topic</string>
+    <string name="topics">Topics</string>
+    <string name="your_topic">Your topic</string>
+    <string name="no_topics_hint">You have not created topics yet. Go ahead</string>
+    <string name="retry">Retry</string>
+    <string name="create">Create</string>
 </resources>

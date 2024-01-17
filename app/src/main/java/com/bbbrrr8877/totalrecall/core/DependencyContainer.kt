@@ -7,6 +7,8 @@ import com.bbbrrr8877.totalrecall.main.MainModule
 import com.bbbrrr8877.totalrecall.main.MainViewModel
 import com.bbbrrr8877.totalrecall.profile.ProfileModule
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileViewModel
+import com.bbbrrr8877.totalrecall.topics.TopicsModule
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicsViewModel
 
 interface DependencyContainer {
 
@@ -25,6 +27,7 @@ interface DependencyContainer {
             MainViewModel::class.java -> MainModule(core)
             LoginViewModel::class.java -> LoginModule(core)
             ProfileViewModel::class.java -> ProfileModule(core)
+            TopicsViewModel::class.java -> TopicsModule(core)
             else -> dependencyContainer.module(className)
         }
     }

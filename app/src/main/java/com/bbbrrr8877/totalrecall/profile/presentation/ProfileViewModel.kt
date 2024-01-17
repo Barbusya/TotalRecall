@@ -7,6 +7,7 @@ import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.login.presentation.LoginScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
+import com.bbbrrr8877.totalrecall.main.Screen
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -38,6 +39,6 @@ class ProfileViewModel(
     }
 
     fun goBack() {
-        //todo
+        navigationCommunication.map(Screen.Pop)
     }
 }
