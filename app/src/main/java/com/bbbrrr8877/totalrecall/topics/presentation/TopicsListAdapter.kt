@@ -7,13 +7,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.Mapper
 import com.bbbrrr8877.totalrecall.core.Retry
 
 class TopicsListAdapter(
     private val clickListener: TopicsClickListener
-) : RecyclerView.Adapter<TopicsViewHolder>(), Mapper.Unit<List<TopicUi>> {
+) : RecyclerView.Adapter<TopicViewHolder>(), Mapper.Unit<List<TopicUi>> {
 
     private val topicsList = mutableListOf<TopicUi>()
 
@@ -22,7 +23,11 @@ class TopicsListAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        2 -> TopicViewHolder(
+        0 -> TopicViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_progress, parent, false)
+        )
+        2, 5 -> TopicNameViewHolder(
             clickListener,
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_topic, parent, false)
@@ -37,7 +42,7 @@ class TopicsListAdapter(
         else -> throw IllegalStateException("unknown viewType $viewType")
     }
 
-    override fun onBindViewHolder(holder: TopicsViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: TopicViewHolder, position: Int) =
         holder.bind(topicsList[position])
 
 
@@ -51,18 +56,18 @@ class TopicsListAdapter(
     }
 }
 
-open class TopicsViewHolder(
+open class TopicViewHolder(
     view: View
-) : RecyclerView.ViewHolder(view) {
+) : ViewHolder(view) {
     open fun bind(item: TopicUi) = Unit
 }
 
-private class TopicViewHolder(
+private class TopicNameViewHolder(
     private val openTopic: OpenTopic,
     view: View
-) : TopicsViewHolder(view) {
+) : TopicViewHolder(view) {
 
-    private val button = itemView.findViewById<Button>(R.id.textViewTopicName)
+    private val button = itemView.findViewById<Button>(R.id.topicNameButton)
     override fun bind(item: TopicUi) {
         item.map(button)
         button.setOnClickListener {
@@ -74,7 +79,7 @@ private class TopicViewHolder(
 private class TopicErrorViewHolder(
     private val retry: Retry,
     view: View
-) : TopicsViewHolder(view) {
+) : TopicViewHolder(view) {
 
     private val errorTextView = itemView.findViewById<TextView>(R.id.errorRetryTextView)
     private val retryButton = itemView.findViewById<Button>(R.id.retryButton)

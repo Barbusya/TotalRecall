@@ -3,6 +3,7 @@ package com.bbbrrr8877.totalrecall.topics
 import com.bbbrrr8877.totalrecall.core.Core
 import com.bbbrrr8877.totalrecall.core.Module
 import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
+import com.bbbrrr8877.totalrecall.topics.data.MyTopicsNamesCache
 import com.bbbrrr8877.totalrecall.topics.data.TopicsCloudDataSource
 import com.bbbrrr8877.totalrecall.topics.data.TopicsRepository
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicsCommunication
@@ -14,7 +15,10 @@ class TopicsModule(private val core: Core) : Module<TopicsViewModel> {
         core.provideDispatchersList(),
         TopicsRepository.Base(
             ChosenTopicCache.Base(core.storage()),
-            TopicsCloudDataSource.Base(core)
+            TopicsCloudDataSource.Base(
+                MyTopicsNamesCache.Base(core.storage()),
+                core
+            )
         ),
         TopicsCommunication.Base()
     )

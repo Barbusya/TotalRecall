@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/topicNameButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_4dp"
-    app:cardUseCompatPadding="true">
+    android:layout_marginVertical="@dimen/_8dp"
+    android:gravity="start"
+    android:maxLines="2"
+    android:textSize="16sp"
+    style="@style/Widget.AppCompat.Button"
+    tools:text="Some topic name and if it is 2 lines long so we will see that" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/_12dp">
-
-        <TextView
-            android:id="@+id/textViewTopicName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/_4dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            tools:text="English" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_4dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            tools:text="12" />
-    </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>

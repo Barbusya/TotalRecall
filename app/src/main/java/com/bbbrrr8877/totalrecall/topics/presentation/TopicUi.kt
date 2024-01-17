@@ -16,7 +16,7 @@ interface TopicUi {
         override fun map(textView: TextView) = Unit
     }
 
-    data class Topic(private val key: String, private val name: String) : TopicUi {
+    data class MyTopic(private val key: String, private val name: String) : TopicUi {
         override fun id() = key
         override fun orderId() = 2
         override fun map(textView: TextView) {
@@ -24,8 +24,25 @@ interface TopicUi {
         }
 
         override fun openTopic(open: OpenTopic) {
-            open.openTopic(TopicInfo(key, name, "todo", 0))
+            open.openTopic(TopicInfo(key, name, true))
         }
+    }
+
+    data class OtherTopic(
+        private val key: String,
+        private val name: String,
+        private val owner: String
+    ) : TopicUi {
+        override fun id() = key
+
+        override fun orderId() = 5
+
+        override fun map(textView: TextView) {
+            textView.text = name
+        }
+
+        override fun openTopic(open: OpenTopic) =
+            open.openTopic(TopicInfo(key, name, false, owner))
     }
 
     data class Error(private val message: String) : TopicUi {
@@ -53,6 +70,6 @@ interface TopicUi {
 data class TopicInfo(
     private val id: String,
     private val name: String,
-    private val description: String,
-    private val amount: Int,
+    private val isMyTopic: Boolean,
+    private val ownerId: String = "",
 )

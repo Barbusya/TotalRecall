@@ -15,11 +15,17 @@ interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
 
         override suspend fun data() = try {
             val list = mutableListOf<Topic>()
-            val topicsList = cloudDataSource.topicsList()
-            if (topicsList.isEmpty())
-                list.add(Topic.NoTopicsHint)
+            val myOwnTopics = cloudDataSource.myTopics()
+            if (myOwnTopics.isEmpty())
+//                list.add(Topic.NoBoardsOfMyOwnHint)
             else
-                list.addAll(topicsList)
+                list.addAll(myOwnTopics)
+//            list.add(Topic.OtherBoardsTitle)
+            val otherTopics = cloudDataSource.otherTopics()
+            if (otherTopics.isEmpty())
+//                list.add(Topic.HowToBeAddedToBoardHint)
+            else
+                list.addAll(otherTopics)
             list
         } catch (e: Exception) {
             listOf(Topic.Error(e.message ?: "error"))

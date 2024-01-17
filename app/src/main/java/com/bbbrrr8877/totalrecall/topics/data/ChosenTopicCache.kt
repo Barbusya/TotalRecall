@@ -12,7 +12,7 @@ interface ChosenTopicCache {
         private val objectStorage: ObjectStorage.Mutable,
         private val key: String = "ChosenTopicCache"
     ) : Mutable {
-        override fun read(): TopicInfo = objectStorage.read(key, TopicInfo("", "", "", 0))
+        override fun read(): TopicInfo = objectStorage.read(key, TopicInfo("", "", true))
 
 
         override fun save(data: TopicInfo) = objectStorage.save(key, data)
