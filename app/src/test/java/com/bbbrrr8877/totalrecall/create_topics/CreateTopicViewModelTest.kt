@@ -4,7 +4,13 @@ import com.bbbrrr8877.totalrecall.FakeDispatchersList
 import com.bbbrrr8877.totalrecall.FakeManageResource
 import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
 import com.bbbrrr8877.totalrecall.FunctionsCallsStack
-import com.bbbrrr8877.totalrecall.topics.presentation.TopicsScreen
+import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicResult
+import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicsRepository
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CardListScreen
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicUiState
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsCommunication
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +18,7 @@ import org.junit.Test
 class CreateTopicViewModelTest {
 
     //region fields
-    private lateinit var createTopicsViewModel: CreateTopicsViewModel
+    private lateinit var viewModel: CreateTopicsViewModel
     private lateinit var functionsCallsStack: FunctionsCallsStack
     private lateinit var repository: FakeRepository
     private lateinit var manageResource: FakeManageResource
@@ -29,12 +35,12 @@ class CreateTopicViewModelTest {
         communication = FakeCommunication.Base(functionsCallsStack)
         navigation = FakeNavigationCommunication.Base(functionsCallsStack)
         dispatchersList = FakeDispatchersList()
-        createTopicsViewModel = CreateTopicsViewModel(
+        viewModel = CreateTopicsViewModel(
             repository,
-            dispatchersList,
             manageResource,
             communication,
-            navigation
+            navigation,
+            dispatchersList,
         )
     }
 
@@ -51,7 +57,7 @@ class CreateTopicViewModelTest {
         viewModel.create(name = topicName)
         communication.check(CreateTopicUiState.Progress)
         repository.checkCreateCalled(value = topicName)
-        navigation.check(TopicsScreen)
+        navigation.check(CardListScreen)
         functionsCallsStack.checkStack(5)
     }
 
@@ -75,10 +81,10 @@ class CreateTopicViewModelTest {
     @Test
     fun `test topic with name already exists`() {
         val topicName = "Topic Name"
-        repository.initWithExistingTopic(emptyList())
+        repository.initWithExistingTopic(listOf(topicName))
         repository.initWithCreateTopicResult(CreateTopicResult.Success)
 
-        viewModel.check(name = topicName)
+        viewModel.checkTopic(name = topicName)
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.TopicAlreadyExists)
         functionsCallsStack.checkStack(2)
@@ -148,9 +154,9 @@ class CreateTopicViewModelTest {
             private val list = mutableListOf<CreateTopicUiState>()
             private var index = 0
 
-            override fun map(source: CreateTopicUiState) {
+            override fun map(data: CreateTopicUiState) {
                 functionsCallsStack.put(MAP_CALL)
-                list.add(source)
+                list.add(data)
             }
 
             override fun check(state: CreateTopicUiState) {
