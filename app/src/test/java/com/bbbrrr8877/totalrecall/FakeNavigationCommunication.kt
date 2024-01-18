@@ -19,9 +19,9 @@ interface FakeNavigationCommunication : NavigationCommunication.Update {
             functionsCallsStack.checkCalled(MAP_CALL)
         }
 
-        override fun map(source: Screen) {
+        override fun map(data: Screen) {
             functionsCallsStack.put(MAP_CALL)
-            list.add(source)
+            list.add(data)
         }
 
         companion object {

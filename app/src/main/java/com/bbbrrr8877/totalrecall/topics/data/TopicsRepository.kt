@@ -6,7 +6,7 @@ import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 
 interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
 
-    suspend fun data(): List<Topic>
+    suspend fun data(): List<TopicList>
 
     class Base(
         private val saveTopic: ChosenTopicCache.Save,
@@ -14,7 +14,7 @@ interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
     ) : TopicsRepository {
 
         override suspend fun data() = try {
-            val list = mutableListOf<Topic>()
+            val list = mutableListOf<TopicList>()
             val myOwnTopics = cloudDataSource.myTopics()
             if (myOwnTopics.isEmpty())
 //                list.add(Topic.NoBoardsOfMyOwnHint)
@@ -28,7 +28,7 @@ interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
                 list.addAll(otherTopics)
             list
         } catch (e: Exception) {
-            listOf(Topic.Error(e.message ?: "error"))
+            listOf(TopicList.Error(e.message ?: "error"))
         }
 
         override fun init(reload: ReloadWithError) = cloudDataSource.init(reload)

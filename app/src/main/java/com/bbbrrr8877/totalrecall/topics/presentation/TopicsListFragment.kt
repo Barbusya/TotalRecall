@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseFragment
 
-class TopicsFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topics) {
+class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topics) {
 
     override val viewModelClass = TopicsViewModel::class.java
 

@@ -14,9 +14,9 @@ import com.bbbrrr8877.totalrecall.core.Retry
 
 class TopicsListAdapter(
     private val clickListener: TopicsClickListener
-) : RecyclerView.Adapter<TopicViewHolder>(), Mapper.Unit<List<TopicUi>> {
+) : RecyclerView.Adapter<TopicViewHolder>(), Mapper.Unit<List<TopicListUi>> {
 
-    private val topicsList = mutableListOf<TopicUi>()
+    private val topicsList = mutableListOf<TopicListUi>()
 
     override fun getItemViewType(position: Int) =
         topicsList[position].orderId()
@@ -47,7 +47,7 @@ class TopicsListAdapter(
 
 
     override fun getItemCount() = topicsList.size
-    override fun map(data: List<TopicUi>) {
+    override fun map(data: List<TopicListUi>) {
         val diff = DiffUtilCallback(topicsList, data)
         val result = DiffUtil.calculateDiff(diff)
         topicsList.clear()
@@ -59,7 +59,7 @@ class TopicsListAdapter(
 open class TopicViewHolder(
     view: View
 ) : ViewHolder(view) {
-    open fun bind(item: TopicUi) = Unit
+    open fun bind(item: TopicListUi) = Unit
 }
 
 private class TopicNameViewHolder(
@@ -68,7 +68,7 @@ private class TopicNameViewHolder(
 ) : TopicViewHolder(view) {
 
     private val button = itemView.findViewById<Button>(R.id.topicNameButton)
-    override fun bind(item: TopicUi) {
+    override fun bind(item: TopicListUi) {
         item.map(button)
         button.setOnClickListener {
             item.openTopic(openTopic)
@@ -83,7 +83,7 @@ private class TopicErrorViewHolder(
 
     private val errorTextView = itemView.findViewById<TextView>(R.id.errorRetryTextView)
     private val retryButton = itemView.findViewById<Button>(R.id.retryButton)
-    override fun bind(item: TopicUi) {
+    override fun bind(item: TopicListUi) {
         item.map(errorTextView)
         retryButton.setOnClickListener {
             retry.retry()
@@ -95,12 +95,12 @@ private class TopicErrorViewHolder(
 interface TopicsClickListener : Retry, OpenTopic
 
 interface OpenTopic {
-    fun openTopic(topicList: TopicInfo)
+    fun openTopic(topicInfo: TopicInfo)
 }
 
 private class DiffUtilCallback(
-    private val oldList: List<TopicUi>,
-    private val newList: List<TopicUi>
+    private val oldList: List<TopicListUi>,
+    private val newList: List<TopicListUi>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 

@@ -16,15 +16,15 @@ import kotlin.coroutines.suspendCoroutine
 
 interface TopicsCloudDataSource : InitialReloadCallback {
 
-    suspend fun myTopics(): List<Topic>
-    suspend fun otherTopics(): List<Topic>
+    suspend fun myTopics(): List<TopicList>
+    suspend fun otherTopics(): List<TopicList>
 
     class Base(
         private val myTopicsNamesCache: MyTopicsNamesCache.Save,
         private val provideDatabase: ProvideDatabase
     ) : TopicsCloudDataSource {
 
-        private val myTopicsCached = mutableListOf<Topic>()
+        private val myTopicsCached = mutableListOf<TopicList>()
         private var loadedTopics = false
         private val otherTopicsIdsListCached = mutableListOf<String>()
 
@@ -50,7 +50,7 @@ interface TopicsCloudDataSource : InitialReloadCallback {
 
         }
 
-        override suspend fun myTopics(): List<Topic> {
+        override suspend fun myTopics(): List<TopicList> {
             if (!loadedTopics) {
                 val myUserId = Firebase.auth.currentUser!!.uid
                 val query = provideDatabase.database()
@@ -59,7 +59,7 @@ interface TopicsCloudDataSource : InitialReloadCallback {
                     .equalTo(myUserId)
                 val sourceList = HandleTopics(query).list()
                 val list = sourceList.map { (id, topicsCloud) ->
-                    Topic.MyTopics(
+                    TopicList.MyTopicsList(
                         id,
                         topicsCloud.name
                     )
@@ -73,8 +73,8 @@ interface TopicsCloudDataSource : InitialReloadCallback {
             return myTopicsCached
         }
 
-        override suspend fun otherTopics(): List<Topic> {
-            val list = mutableListOf<Topic>()
+        override suspend fun otherTopics(): List<TopicList> {
+            val list = mutableListOf<TopicList>()
             otherTopicsIdsListCached.forEach { topicId ->
                 val query = provideDatabase.database()
                     .child("topics")
@@ -83,7 +83,7 @@ interface TopicsCloudDataSource : InitialReloadCallback {
 
                 val topics =
                     HandleTopics(query).list().map { (id, topicCloud) ->
-                        Topic.OtherTopic(
+                        TopicList.OtherTopicList(
                             id,
                             topicCloud.name,
                             topicCloud.owner
@@ -117,7 +117,7 @@ private class HandleTopics(private val query: Query) {
     }
 }
 
-private data class TopicsCloud(
+data class TopicsCloud(
     val owner: String = "",
     val name: String = "",
 )

@@ -16,28 +16,28 @@ class TopicsViewModel(
     private val navigation: NavigationCommunication.Update,
     dispatchersList: DispatchersList,
     private val topicsRepository: TopicsRepository,
-    private val communication: TopicsCommunication,
+    private val communication: TopicsListCommunication,
 ) : BaseViewModel(dispatchersList), TopicsViewModelActions {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<TopicsUiState>) {
+    override fun observe(owner: LifecycleOwner, observer: Observer<TopicsListUiState>) {
         communication.observe(owner, observer)
     }
 
     override fun init(firstRun: Boolean) {
-        communication.map(TopicsUiState.Progress)
+        communication.map(TopicsListUiState.Progress)
         topicsRepository.init(this)
     }
 
-    override fun error(message: String) = communication.map(TopicsUiState.Error(message))
+    override fun error(message: String) = communication.map(TopicsListUiState.Error(message))
 
     override fun reload() {
         handle({ topicsRepository.data() }) {
-            communication.map(TopicsUiState.Base(it))
+            communication.map(TopicsListUiState.Base(it))
         }
     }
 
     override fun retry() {
-        communication.map(TopicsUiState.Progress)
+        communication.map(TopicsListUiState.Progress)
         reload()
     }
 
@@ -49,7 +49,8 @@ class TopicsViewModel(
     fun showProfile() = navigation.map(ProfileScreen)
 }
 
-interface TopicsViewModelActions : Init, Communication.Observe<TopicsUiState>, TopicsClickListener,
-        ReloadWithError
+interface TopicsViewModelActions : Init, Communication.Observe<TopicsListUiState>,
+    TopicsClickListener,
+    ReloadWithError
 
 interface ReloadWithError : Reload, ProvideError

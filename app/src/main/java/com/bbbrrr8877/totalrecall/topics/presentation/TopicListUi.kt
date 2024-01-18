@@ -3,20 +3,20 @@ package com.bbbrrr8877.totalrecall.topics.presentation
 import android.widget.TextView
 import com.bbbrrr8877.totalrecall.R
 
-interface TopicUi {
+interface TopicListUi {
 
     fun id(): String
     fun openTopic(open: OpenTopic) = Unit
     fun orderId(): Int
     fun map(textView: TextView)
 
-    object Progress : TopicUi {
+    object Progress : TopicListUi {
         override fun id() = "TopicUiProgress"
         override fun orderId() = 0
         override fun map(textView: TextView) = Unit
     }
 
-    data class MyTopic(private val key: String, private val name: String) : TopicUi {
+    data class MyTopic(private val key: String, private val name: String) : TopicListUi {
         override fun id() = key
         override fun orderId() = 2
         override fun map(textView: TextView) {
@@ -28,11 +28,11 @@ interface TopicUi {
         }
     }
 
-    data class OtherTopic(
+    data class OtherTopicList(
         private val key: String,
         private val name: String,
         private val owner: String
-    ) : TopicUi {
+    ) : TopicListUi {
         override fun id() = key
 
         override fun orderId() = 5
@@ -45,7 +45,7 @@ interface TopicUi {
             open.openTopic(TopicInfo(key, name, false, owner))
     }
 
-    data class Error(private val message: String) : TopicUi {
+    data class Error(private val message: String) : TopicListUi {
         override fun id() = "TopicUiError$message"
         override fun orderId() = 7
         override fun map(textView: TextView) {
@@ -53,14 +53,14 @@ interface TopicUi {
         }
     }
 
-    object TopicTitle : TopicUi {
+    object TopicTitle : TopicListUi {
         override fun id() = "TopicUiTopicTitle"
         override fun orderId() = 1
         override fun map(textView: TextView) = textView.setText(R.string.your_topic)
 
     }
 
-    object NoTopicsHint : TopicUi {
+    object NoTopicsHint : TopicListUi {
         override fun id() = "TopicUiNoTopics"
         override fun orderId() = 3
         override fun map(textView: TextView) = textView.setText(R.string.no_topics_hint)

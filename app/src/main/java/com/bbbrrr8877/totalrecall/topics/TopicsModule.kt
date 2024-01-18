@@ -6,7 +6,7 @@ import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
 import com.bbbrrr8877.totalrecall.topics.data.MyTopicsNamesCache
 import com.bbbrrr8877.totalrecall.topics.data.TopicsCloudDataSource
 import com.bbbrrr8877.totalrecall.topics.data.TopicsRepository
-import com.bbbrrr8877.totalrecall.topics.presentation.TopicsCommunication
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicsListCommunication
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicsViewModel
 
 class TopicsModule(private val core: Core) : Module<TopicsViewModel> {
@@ -20,6 +20,6 @@ class TopicsModule(private val core: Core) : Module<TopicsViewModel> {
                 core
             )
         ),
-        TopicsCommunication.Base()
+        TopicsListCommunication.Base()
     )
 }

@@ -3,8 +3,7 @@ package com.bbbrrr8877.totalrecall.login.data
 import com.bbbrrr8877.totalrecall.login.presentation.LoginCommunication
 import com.bbbrrr8877.totalrecall.login.presentation.LoginUiState
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
-import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
-import com.bbbrrr8877.totalrecall.topics.presentation.TopicsScreen
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicsListScreen
 
 interface LoginResult {
 
@@ -14,7 +13,7 @@ interface LoginResult {
         override fun map(
             communication: LoginCommunication,
             navigation: NavigationCommunication.Update
-        ) = navigation.map(TopicsScreen)
+        ) = navigation.map(TopicsListScreen)
     }
 
     data class Failed(private val message: String) : LoginResult {
