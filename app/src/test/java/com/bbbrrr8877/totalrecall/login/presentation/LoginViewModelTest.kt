@@ -1,7 +1,9 @@
 package com.bbbrrr8877.totalrecall.login.presentation
 
-import com.bbbrrr8877.totalrecall.core.DispatchersList
-import com.bbbrrr8877.totalrecall.core.ManageResource
+import com.bbbrrr8877.totalrecall.FakeDispatchersList
+import com.bbbrrr8877.totalrecall.FakeManageResource
+import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
+import com.bbbrrr8877.totalrecall.FunctionsCallsStack
 import com.bbbrrr8877.totalrecall.login.data.LoginRepository
 import com.bbbrrr8877.totalrecall.login.data.LoginResult
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
@@ -9,8 +11,6 @@ import com.bbbrrr8877.totalrecall.main.Screen
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -143,10 +143,6 @@ class LoginViewModelTest {
         }
     }
 
-    class FakeManageResource(private val string: String) : ManageResource {
-        override fun string(id: Int): String = string
-    }
-
     interface FakeLoginCommunication : LoginCommunication {
 
 
@@ -174,14 +170,6 @@ class LoginViewModelTest {
 
     }
 
-    private class FakeDispatchersList(
-        private val dispatcher: CoroutineDispatcher = TestCoroutineDispatcher()
-    ) : DispatchersList {
-
-        override fun io(): CoroutineDispatcher = dispatcher
-        override fun ui(): CoroutineDispatcher = dispatcher
-    }
-
     interface FakeAuthResultWrapper : AuthResultWrapper {
 
         object Successful : FakeAuthResultWrapper {
@@ -202,55 +190,5 @@ class LoginViewModelTest {
 
     }
 
-    interface FakeNavigationCommunication : NavigationCommunication.Update {
-
-        fun check(screen: Screen)
-
-        class Base(private val functionsCallsStack: FunctionsCallsStack) :
-            FakeNavigationCommunication {
-
-            private val list = mutableListOf<Screen>()
-            private var index = 0
-
-            override fun check(screen: Screen) {
-                assertEquals(screen, list[index++])
-                functionsCallsStack.checkCalled(MAP_CALL)
-            }
-
-            override fun map(source: Screen) {
-                functionsCallsStack.put(MAP_CALL)
-                list.add(source)
-            }
-
-            companion object {
-                private const val MAP_CALL = "NavigationCommunication.Update#map"
-            }
-        }
-
-    }
 }
 
-interface FunctionsCallsStack {
-
-    fun put(value: String)
-    fun checkCalled(value: String)
-    fun checkStack(value: Int)
-
-    class Base : FunctionsCallsStack {
-
-        private val list = mutableListOf<String>()
-
-        override fun put(value: String) {
-            list.add(value)
-        }
-
-        override fun checkCalled(value: String) {
-            assertEquals(list.contains(value), true)
-        }
-
-        override fun checkStack(value: Int) {
-            assertEquals(value, list.size)
-        }
-
-    }
-}
