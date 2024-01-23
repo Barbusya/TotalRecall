@@ -8,7 +8,7 @@ import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.core.ProvideError
 import com.bbbrrr8877.totalrecall.core.Reload
-import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CreateTopicScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
 import com.bbbrrr8877.totalrecall.topics.data.TopicsRepository
