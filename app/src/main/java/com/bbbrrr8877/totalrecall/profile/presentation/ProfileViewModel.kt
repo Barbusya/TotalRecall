@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
+import com.bbbrrr8877.totalrecall.core.GoBack
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.login.presentation.LoginScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
@@ -14,7 +15,7 @@ import com.google.firebase.auth.auth
 class ProfileViewModel(
     private val communication: ProfileCommunication,
     private val navigationCommunication: NavigationCommunication.Update
-) : ViewModel(), Init, Communication.Observe<ProfileUiState> {
+) : ViewModel(), Init, Communication.Observe<ProfileUiState>, GoBack {
 
     override fun observe(owner: LifecycleOwner, observer: Observer<ProfileUiState>) =
         communication.observe(owner, observer)
@@ -38,7 +39,7 @@ class ProfileViewModel(
         }
     }
 
-    fun goBack() {
+    override fun goBack() {
         navigationCommunication.map(Screen.Pop)
     }
 }

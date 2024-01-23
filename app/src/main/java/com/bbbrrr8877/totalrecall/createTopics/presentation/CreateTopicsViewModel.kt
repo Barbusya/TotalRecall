@@ -2,12 +2,15 @@ package com.bbbrrr8877.totalrecall.createTopics.presentation
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.core.DispatchersList
+import com.bbbrrr8877.totalrecall.core.GoBack
 import com.bbbrrr8877.totalrecall.core.ManageResource
 import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicsRepository
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicsListScreen
 
 class CreateTopicsViewModel(
     private val repository: CreateTopicsRepository,
@@ -15,27 +18,38 @@ class CreateTopicsViewModel(
     private val communication: CreateTopicsCommunication,
     private val navigation: NavigationCommunication.Update,
     dispatchersList: DispatchersList,
-) : BaseViewModel(dispatchersList), Communication.Observe<CreateTopicUiState> {
+) : BaseViewModel(dispatchersList), CreateTopicActions {
 
 
-    fun disableCreate() =
+    override fun disableCreate() =
         communication.map(CreateTopicUiState.CanNotCreateTopic)
+
+    override fun goBack() = navigation.map(TopicsListScreen)
 
     override fun observe(owner: LifecycleOwner, observer: Observer<CreateTopicUiState>) {
         communication.observe(owner, observer)
     }
 
-    fun checkTopic(name: String) = communication.map(
+    override fun checkTopic(name: String) = communication.map(
         if (repository.contains(name))
-            CreateTopicUiState.TopicAlreadyExists
+            CreateTopicUiState.TopicAlreadyExists(manageResource.string(R.string.topic_already_exists))
         else
             CreateTopicUiState.CanCreateTopic
     )
 
-    fun create(name: String) {
+    override fun createTopic(name: String) {
         communication.map(CreateTopicUiState.Progress)
         handle({ repository.create(name) }) {
             it.map(communication, navigation)
         }
     }
+}
+
+interface CreateTopicActions : CreateTopicUiActions, GoBack, Communication.Observe<CreateTopicUiState> {
+    fun createTopic(name: String)
+}
+
+interface CreateTopicUiActions {
+    fun checkTopic(name: String)
+    fun disableCreate()
 }

@@ -31,7 +31,7 @@ class CreateTopicViewModelTest {
     fun setup() {
         functionsCallsStack = FunctionsCallsStack.Base()
         repository = FakeRepository.Base(functionsCallsStack)
-        manageResource = FakeManageResource("stub")
+        manageResource = FakeManageResource("topic already exists")
         communication = FakeCommunication.Base(functionsCallsStack)
         navigation = FakeNavigationCommunication.Base(functionsCallsStack)
         dispatchersList = FakeDispatchersList()
@@ -54,7 +54,7 @@ class CreateTopicViewModelTest {
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.CanCreateTopic)
 
-        viewModel.create(name = topicName)
+        viewModel.createTopic(name = topicName)
         communication.check(CreateTopicUiState.Progress)
         repository.checkCreateCalled(value = topicName)
         navigation.check(CardListScreen)
@@ -71,7 +71,7 @@ class CreateTopicViewModelTest {
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.CanCreateTopic)
 
-        viewModel.create(name = topicName)
+        viewModel.createTopic(name = topicName)
         communication.check(CreateTopicUiState.Progress)
         repository.checkCreateCalled(value = topicName)
         communication.check(CreateTopicUiState.Error(errorMessage = "network problem"))
@@ -86,7 +86,7 @@ class CreateTopicViewModelTest {
 
         viewModel.checkTopic(name = topicName)
         repository.checkContainsCalled(value = topicName)
-        communication.check(CreateTopicUiState.TopicAlreadyExists)
+        communication.check(CreateTopicUiState.TopicAlreadyExists("topic already exists"))
         functionsCallsStack.checkStack(2)
     }
 
@@ -125,7 +125,7 @@ class CreateTopicViewModelTest {
                 assertEquals(value, createCalledList[createCalledIndex++])
             }
 
-            override fun create(name: String): CreateTopicResult {
+            override suspend fun create(name: String): CreateTopicResult {
                 createCalledList.add(name)
                 functionsCallsStack.put(CREATE_CALLED)
                 return createResult

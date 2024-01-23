@@ -8,6 +8,7 @@ import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.core.ProvideError
 import com.bbbrrr8877.totalrecall.core.Reload
+import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
 import com.bbbrrr8877.totalrecall.topics.data.TopicsRepository
@@ -46,11 +47,16 @@ class TopicsViewModel(
         // todo navigation.map(TopicScreen)
     }
 
-    fun showProfile() = navigation.map(ProfileScreen)
+    override fun showProfile() = navigation.map(ProfileScreen)
+
+    override fun createTopic() = navigation.map(CreateTopicScreen)
 }
 
 interface TopicsViewModelActions : Init, Communication.Observe<TopicsListUiState>,
     TopicsClickListener,
-    ReloadWithError
+    ReloadWithError {
+        fun createTopic()
+        fun showProfile()
+    }
 
 interface ReloadWithError : Reload, ProvideError

@@ -12,4 +12,9 @@
     <string name="no_topics_hint">You have not created topics yet. Go ahead</string>
     <string name="retry">Retry</string>
     <string name="create">Create</string>
+    <string name="back">Back\n</string>
+    <string name="create_topic">Create Topic</string>
+    <string name="topic_name">Topic name</string>
+    <string name="at_least_1_symbols">At least 1 symbols</string>
+    <string name="topic_already_exists">Topic already exists</string>
 </resources>

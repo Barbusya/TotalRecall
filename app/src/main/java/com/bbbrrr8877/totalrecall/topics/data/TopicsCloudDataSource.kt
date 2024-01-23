@@ -107,7 +107,7 @@ private class HandleTopics(private val query: Query) {
                         it.getValue(TopicsCloud::class.java)!!
                     )
                 }
-                cont.resume(data.map { Pair(it.first, it.second) })
+                cont.resume(data)
             }
 
             override fun onCancelled(error: DatabaseError) {
