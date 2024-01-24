@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
-import android.util.Log
+import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 import com.google.firebase.Firebase
@@ -34,7 +34,6 @@ interface TopicsCloudDataSource : InitialReloadCallback {
                 .child("topics-members")
                 .orderByChild("memberId")
                 .equalTo(myUserId)
-            Log.d("Bulat", "query: $query")
             query.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val data = snapshot.children.mapNotNull {
@@ -68,7 +67,6 @@ interface TopicsCloudDataSource : InitialReloadCallback {
                 val myTopicsNameList = sourceList.map { (_, topicCloud) -> topicCloud.name }
                 myTopicsNamesCache.save(myTopicsNameList)
                 loadedTopics = true
-                Log.d("Bulat", "topicCached: $myTopicsCached")
             }
             return myTopicsCached
         }

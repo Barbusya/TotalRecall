@@ -1,5 +1,6 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
+import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.Save
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
@@ -17,15 +18,15 @@ interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
             val list = mutableListOf<TopicList>()
             val myOwnTopics = cloudDataSource.myTopics()
             if (myOwnTopics.isEmpty())
-//                list.add(Topic.NoBoardsOfMyOwnHint)
+                list.add(TopicList.NoTopicsHint)
             else
                 list.addAll(myOwnTopics)
-//            list.add(Topic.OtherBoardsTitle)
-            val otherTopics = cloudDataSource.otherTopics()
-            if (otherTopics.isEmpty())
-//                list.add(Topic.HowToBeAddedToBoardHint)
-            else
-                list.addAll(otherTopics)
+//            list.add(TopicList.OtherTopicsTitle)
+//            val otherTopics = cloudDataSource.otherTopics()
+//            if (otherTopics.isEmpty())
+//                list.add(TopicList.HowToBeAddedToTopicHint)
+//            else
+//            list.addAll(otherTopics)
             list
         } catch (e: Exception) {
             listOf(TopicList.Error(e.message ?: "error"))
@@ -37,7 +38,3 @@ interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
     }
 }
 
-interface InitialReloadCallback {
-
-    fun init(reload: ReloadWithError)
-}

@@ -15,6 +15,10 @@ interface CardsList {
         override fun toUi() = CardsListUi.Card(key, answer, clue, image)
     }
 
+    object NoCardsHint : CardsList {
+        override fun toUi() = CardsListUi.NoCardsHint
+    }
+
     data class Error(private val message: String) : CardsList {
         override fun toUi() = CardsListUi.Error(message)
     }

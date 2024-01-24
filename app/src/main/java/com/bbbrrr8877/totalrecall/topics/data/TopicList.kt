@@ -6,10 +6,6 @@ interface TopicList {
 
     fun toUi(): TopicListUi
 
-    object TopicsTitle : TopicList {
-        override fun toUi() = TopicListUi.TopicTitle
-    }
-
     data class OtherTopicList(
         private val key: String,
         private val name: String,
@@ -29,4 +25,5 @@ interface TopicList {
     data class Error(private val message: String) : TopicList {
         override fun toUi() = TopicListUi.Error(message)
     }
+
 }

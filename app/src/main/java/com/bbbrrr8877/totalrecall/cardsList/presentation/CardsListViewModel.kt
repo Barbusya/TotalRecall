@@ -15,7 +15,8 @@ class CardsListViewModel(
     private val communication: CardsListCommunication,
 ) : BaseViewModel(dispatchersList), CardsListViewModelActions {
     override fun init(firstRun: Boolean) {
-        TODO("Not yet implemented")
+        communication.map(CardsListUiState.Progress)
+        cardsListRepository.init(this)
     }
 
     override fun reload() {

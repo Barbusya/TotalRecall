@@ -19,5 +19,15 @@ interface CardsListUi {
 
     }
 
+    object NoCardsHint : CardsListUi {
+
+    }
 
 }
+
+data class CardsInfo(
+    private val id: String,
+    private val answer: String,
+    private val clue: String,
+    private val image: String = ""
+)
