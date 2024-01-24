@@ -6,7 +6,7 @@ import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
 import com.bbbrrr8877.totalrecall.FunctionsCallsStack
 import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicResult
 import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicsRepository
-import com.bbbrrr8877.totalrecall.createTopics.presentation.CardListScreen
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicUiState
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsCommunication
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsViewModel

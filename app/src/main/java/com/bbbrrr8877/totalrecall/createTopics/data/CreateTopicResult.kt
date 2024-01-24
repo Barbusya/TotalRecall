@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.createTopics.data
 
-import com.bbbrrr8877.totalrecall.createTopics.presentation.CardListScreen
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicUiState
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsCommunication
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
