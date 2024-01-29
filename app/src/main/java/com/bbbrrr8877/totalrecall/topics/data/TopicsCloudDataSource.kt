@@ -1,5 +1,6 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
+import android.util.Log
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
@@ -16,8 +17,7 @@ import kotlin.coroutines.suspendCoroutine
 
 interface TopicsCloudDataSource : InitialReloadCallback {
 
-    suspend fun myTopics(): List<TopicList>
-    suspend fun otherTopics(): List<TopicList>
+    suspend fun topics(): List<TopicList>
 
     class Base(
         private val myTopicsNamesCache: MyTopicsNamesCache.Save,
@@ -26,21 +26,15 @@ interface TopicsCloudDataSource : InitialReloadCallback {
 
         private val myTopicsCached = mutableListOf<TopicList>()
         private var loadedTopics = false
-        private val otherTopicsIdsListCached = mutableListOf<String>()
 
         override fun init(reload: ReloadWithError) {
             val myUserId = Firebase.auth.currentUser!!.uid
             val query = provideDatabase.database()
-                .child("topics-members")
+                .child("topics")
                 .orderByChild("memberId")
                 .equalTo(myUserId)
             query.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val data = snapshot.children.mapNotNull {
-                        it.getValue(OtherTopicCloud::class.java)?.topicId
-                    }
-                    otherTopicsIdsListCached.clear()
-                    otherTopicsIdsListCached.addAll(data)
                     reload.reload()
                 }
 
@@ -49,7 +43,7 @@ interface TopicsCloudDataSource : InitialReloadCallback {
 
         }
 
-        override suspend fun myTopics(): List<TopicList> {
+        override suspend fun topics(): List<TopicList> {
             if (!loadedTopics) {
                 val myUserId = Firebase.auth.currentUser!!.uid
                 val query = provideDatabase.database()
@@ -70,27 +64,6 @@ interface TopicsCloudDataSource : InitialReloadCallback {
             }
             return myTopicsCached
         }
-
-        override suspend fun otherTopics(): List<TopicList> {
-            val list = mutableListOf<TopicList>()
-            otherTopicsIdsListCached.forEach { topicId ->
-                val query = provideDatabase.database()
-                    .child("topics")
-                    .orderByKey()
-                    .equalTo(topicId)
-
-                val topics =
-                    HandleTopics(query).list().map { (id, topicCloud) ->
-                        TopicList.OtherTopicList(
-                            id,
-                            topicCloud.name,
-                            topicCloud.owner
-                        )
-                    }
-                list.addAll(topics)
-            }
-            return list
-        }
     }
 }
 
@@ -100,6 +73,7 @@ private class HandleTopics(private val query: Query) {
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.children.mapNotNull {
+                    Log.d("Bulat", "Topics data: $it")
                     Pair(
                         it.key!!,
                         it.getValue(TopicsCloud::class.java)!!
@@ -116,13 +90,6 @@ private class HandleTopics(private val query: Query) {
 }
 
 data class TopicsCloud(
-    val owner: String = "",
     val name: String = "",
+    val owner: String = ""
 )
-
-private data class OtherTopicCloud(
-    val memberId: String = "",
-    val topicId: String = "",
-)
-
-

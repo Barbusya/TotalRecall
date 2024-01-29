@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Text"
+        android:id="@+id/textViewAnswer"
+        android:gravity="center"
+        android:layout_margin="@dimen/_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Answer answer answer"/>
+
+    <TextView
+        android:text="Text"
+        android:id="@+id/textViewClue"
+        android:layout_margin="@dimen/_16dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Clue clue clue"/>
+
+</LinearLayout>

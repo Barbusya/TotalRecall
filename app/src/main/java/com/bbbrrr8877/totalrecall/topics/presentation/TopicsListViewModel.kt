@@ -5,10 +5,12 @@ import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
+import com.bbbrrr8877.totalrecall.core.Create
 import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.core.ProvideError
 import com.bbbrrr8877.totalrecall.core.Reload
+import com.bbbrrr8877.totalrecall.core.ShowProfile
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
@@ -50,14 +52,11 @@ class TopicsViewModel(
 
     override fun showProfile() = navigation.map(ProfileScreen)
 
-    override fun createTopic() = navigation.map(CreateTopicScreen)
+    override fun create() = navigation.map(CreateTopicScreen)
 }
 
 interface TopicsViewModelActions : Init, Communication.Observe<TopicsListUiState>,
     TopicsClickListener,
-    ReloadWithError {
-    fun createTopic()
-    fun showProfile()
-}
+    ReloadWithError, ShowProfile, Create
 
 interface ReloadWithError : Reload, ProvideError

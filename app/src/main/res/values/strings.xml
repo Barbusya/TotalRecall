@@ -10,6 +10,7 @@
     <string name="topics">Topics</string>
     <string name="your_topic">Your topic</string>
     <string name="no_topics_hint">You have not created topics yet. Go ahead</string>
+    <string name="no_cards_hint">You have not created cards yet. Go ahead</string>
     <string name="retry">Retry</string>
     <string name="create">Create</string>
     <string name="back">Back\n</string>

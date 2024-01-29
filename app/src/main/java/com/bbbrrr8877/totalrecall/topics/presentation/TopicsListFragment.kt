@@ -19,7 +19,7 @@ class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topic
             viewModel.showProfile()
         }
         view.findViewById<View>(R.id.createButton).setOnClickListener {
-            viewModel.createTopic()
+            viewModel.create()
         }
 
         viewModel.observe(this) {

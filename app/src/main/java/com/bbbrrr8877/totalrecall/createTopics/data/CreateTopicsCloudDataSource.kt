@@ -21,7 +21,7 @@ interface CreateTopicsCloudDataSource {
             val reference = provideDatabase.database().child("topics").push()
             val task = reference.setValue(TopicsCloud(myUid, name))
             handleResult(task)
-            return TopicInfo(reference.key!!, name, true)
+            return TopicInfo(reference.key!!, name)
         }
 
         private suspend fun handleResult(value: Task<Void>): Unit =

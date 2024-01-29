@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bbbrrr8877.totalrecall.R
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsInfo
 import com.bbbrrr8877.totalrecall.core.Mapper
 import com.bbbrrr8877.totalrecall.core.Retry
 
@@ -48,7 +49,7 @@ class TopicsListAdapter(
 
     override fun getItemCount() = topicsList.size
     override fun map(data: List<TopicListUi>) {
-        val diff = DiffUtilCallback(topicsList, data)
+        val diff = TopicsListDiffUtilCallback(topicsList, data)
         val result = DiffUtil.calculateDiff(diff)
         topicsList.clear()
         topicsList.addAll(data)
@@ -56,9 +57,7 @@ class TopicsListAdapter(
     }
 }
 
-open class TopicViewHolder(
-    view: View
-) : ViewHolder(view) {
+open class TopicViewHolder(view: View) : ViewHolder(view) {
     open fun bind(item: TopicListUi) = Unit
 }
 
@@ -98,7 +97,7 @@ interface OpenTopic {
     fun openTopic(topicInfo: TopicInfo)
 }
 
-private class DiffUtilCallback(
+private class TopicsListDiffUtilCallback(
     private val oldList: List<TopicListUi>,
     private val newList: List<TopicListUi>
 ) : DiffUtil.Callback() {

@@ -24,7 +24,7 @@ interface TopicListUi {
         }
 
         override fun openTopic(open: OpenTopic) {
-            open.openTopic(TopicInfo(key, name, true))
+            open.openTopic(TopicInfo(key, name))
         }
     }
 
@@ -42,7 +42,7 @@ interface TopicListUi {
         }
 
         override fun openTopic(open: OpenTopic) =
-            open.openTopic(TopicInfo(key, name, false, owner))
+            open.openTopic(TopicInfo(key, name))
     }
 
     data class Error(private val message: String) : TopicListUi {
@@ -70,6 +70,4 @@ interface TopicListUi {
 data class TopicInfo(
     private val id: String,
     private val name: String,
-    private val isMyTopic: Boolean,
-    private val ownerId: String = "",
 )
