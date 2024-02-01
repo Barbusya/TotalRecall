@@ -31,6 +31,10 @@ class CardsListAdapter : RecyclerView.Adapter<CardsListViewHolder>(),
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_card, parent, false)
         )
+        7 -> CardsErrorViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_card, parent, false)
+        )
 
         else -> throw IllegalStateException("unknown viewType $viewType")
     }
@@ -68,6 +72,17 @@ private class CardViewHolder(
 }
 
 private class NoCardsHintViewHolder(
+    view: View
+) : CardsListViewHolder(view) {
+    private val tvAnswer = itemView.findViewById<TextView>(R.id.textViewAnswer)
+    private val tvClue = itemView.findViewById<TextView>(R.id.textViewClue)
+
+    override fun bind(item: CardsListUi) {
+        item.map(tvAnswer, tvClue)
+    }
+}
+
+private class CardsErrorViewHolder(
     view: View
 ) : CardsListViewHolder(view) {
     private val tvAnswer = itemView.findViewById<TextView>(R.id.textViewAnswer)

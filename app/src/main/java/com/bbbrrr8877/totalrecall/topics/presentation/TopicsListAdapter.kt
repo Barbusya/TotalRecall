@@ -27,7 +27,13 @@ class TopicsListAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_progress, parent, false)
         )
-        2, 5 -> TopicNameViewHolder(
+        2 -> TopicNameViewHolder(
+            clickListener,
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_topic, parent, false)
+        )
+
+        3 -> NoTopicsHintViewHolder(
             clickListener,
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_topic, parent, false)
@@ -61,6 +67,20 @@ open class TopicViewHolder(view: View) : ViewHolder(view) {
 }
 
 private class TopicNameViewHolder(
+    private val openTopic: OpenTopic,
+    view: View
+) : TopicViewHolder(view) {
+
+    private val button = itemView.findViewById<Button>(R.id.topicNameButton)
+    override fun bind(item: TopicListUi) {
+        item.map(button)
+        button.setOnClickListener {
+            item.openTopic(openTopic)
+        }
+    }
+}
+
+private class NoTopicsHintViewHolder(
     private val openTopic: OpenTopic,
     view: View
 ) : TopicViewHolder(view) {
