@@ -3,7 +3,7 @@ package com.bbbrrr8877.totalrecall.cardsList.data
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.core.ObjectStorage
 
-interface ChosenCardsCache {
+interface ChosenCardCache {
 
     interface Save : com.bbbrrr8877.totalrecall.core.Save<CardInfo>
 

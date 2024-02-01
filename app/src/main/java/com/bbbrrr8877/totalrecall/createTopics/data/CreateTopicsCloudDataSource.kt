@@ -19,7 +19,7 @@ interface CreateTopicsCloudDataSource {
         override suspend fun createTopic(name: String): TopicInfo {
             val myUid = Firebase.auth.currentUser!!.uid
             val reference = provideDatabase.database().child("topics").push()
-            val task = reference.setValue(TopicsCloud(myUid, name))
+            val task = reference.setValue(TopicsCloud(name, myUid))
             handleResult(task)
             return TopicInfo(reference.key!!, name)
         }

@@ -12,7 +12,7 @@ interface CardsListRepository : InitialReloadCallback, Save<CardInfo> {
     suspend fun data(): List<CardsList>
 
     class Base(
-        private val saveCards: ChosenCardsCache.Save,
+        private val saveCards: ChosenCardCache.Save,
         private val readTopic: ChosenTopicCache.Read,
         private val cloudDataSource: CardsListCloudDataSource
     ) : CardsListRepository {

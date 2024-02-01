@@ -3,7 +3,7 @@ package com.bbbrrr8877.totalrecall.cardsList
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsListCloudDataSource
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsListRepository
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsNamesCache
-import com.bbbrrr8877.totalrecall.cardsList.data.ChosenCardsCache
+import com.bbbrrr8877.totalrecall.cardsList.data.ChosenCardCache
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsListCommunication
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsListViewModel
 import com.bbbrrr8877.totalrecall.core.Core
@@ -16,7 +16,7 @@ class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
         core.navigation(),
         core.provideDispatchersList(),
         CardsListRepository.Base(
-            ChosenCardsCache.Base(core.storage()),
+            ChosenCardCache.Base(core.storage()),
             ChosenTopicCache.Base(core.storage()),
             CardsListCloudDataSource.Base(
                 CardsNamesCache.Base(core.storage()),

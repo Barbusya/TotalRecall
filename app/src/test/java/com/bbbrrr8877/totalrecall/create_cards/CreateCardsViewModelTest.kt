@@ -4,6 +4,11 @@ import com.bbbrrr8877.totalrecall.FakeDispatchersList
 import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
 import com.bbbrrr8877.totalrecall.FunctionsCallsStack
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
+import com.bbbrrr8877.totalrecall.createCard.data.CreateCardRepository
+import com.bbbrrr8877.totalrecall.createCard.data.CreateCardResult
+import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardCommunication
+import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardUiState
+import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -11,7 +16,7 @@ import org.junit.Test
 class CreateCardsViewModelTest {
 
     //region fields
-    private lateinit var viewModel: CreateCardsViewModel
+    private lateinit var viewModel: CreateCardViewModel
     private lateinit var functionCallsStack: FunctionsCallsStack
     private lateinit var repository: FakeRepository
     private lateinit var communication: FakeCommunication
@@ -26,7 +31,7 @@ class CreateCardsViewModelTest {
         communication = FakeCommunication.Base(functionCallsStack)
         navigation = FakeNavigationCommunication.Base(functionCallsStack)
         dispatchersList = FakeDispatchersList()
-        viewModel = CreateCardsViewModel(
+        viewModel = CreateCardViewModel(
             repository,
             communication,
             navigation,
@@ -40,7 +45,7 @@ class CreateCardsViewModelTest {
 
         val cardAnswer = "Card Answer"
         val cardClue = "Card Clue"
-        viewModel.create(answer = cardAnswer, clue = cardClue)
+        viewModel.createCard(answer = cardAnswer, clue = cardClue)
         communication.check(CreateCardUiState.Progress)
         repository.checkCreateCalled(value = cardAnswer)
         navigation.check(CardListScreen)
@@ -54,14 +59,14 @@ class CreateCardsViewModelTest {
 
         val cardAnswer = "Card Answer"
         val cardClue = "Card Clue"
-        viewModel.create(answer = cardAnswer, clue = cardClue)
+        viewModel.createCard(answer = cardAnswer, clue = cardClue)
         communication.check(CreateCardUiState.Progress)
         repository.checkCreateCalled(value = cardAnswer)
         communication.check(CreateCardUiState.Error(errorMessage = "network problem"))
         functionCallsStack.checkStack(3)
     }
 
-    interface FakeCommunication : CreateCardsCommunication {
+    interface FakeCommunication : CreateCardCommunication {
 
         fun check(state: CreateCardUiState)
 
@@ -83,12 +88,13 @@ class CreateCardsViewModelTest {
             }
 
         }
+
         companion object {
             private const val MAP_CALL = "CreateTopicCommunication#map"
         }
     }
 
-    interface FakeRepository : CreateCardsRepository {
+    interface FakeRepository : CreateCardRepository {
 
         fun checkCreateCalled(value: String)
         fun initWithCreateResult(result: CreateCardResult)
@@ -107,7 +113,7 @@ class CreateCardsViewModelTest {
                 createResult = result
             }
 
-            override fun create(answer: String, clue: String) : CreateCardResult {
+            override suspend fun createCard(answer: String, clue: String): CreateCardResult {
                 createCalledList.add(answer)
                 functionsCallsStack.put(CREATE_CALLED)
                 return createResult
