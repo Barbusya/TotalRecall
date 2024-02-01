@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall.create_topics
+package com.bbbrrr8877.totalrecall.create_cards
 
 import com.bbbrrr8877.totalrecall.FakeDispatchersList
 import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
