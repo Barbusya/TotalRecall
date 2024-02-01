@@ -70,4 +70,6 @@ interface TopicListUi {
 data class TopicInfo(
     private val id: String,
     private val name: String,
-)
+) {
+    fun name() = name
+}

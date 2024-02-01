@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsInfo
 import com.bbbrrr8877.totalrecall.core.Mapper
 import com.bbbrrr8877.totalrecall.core.Retry
 

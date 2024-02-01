@@ -7,7 +7,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Text"
         android:id="@+id/textViewAnswer"
         android:gravity="center"
         android:layout_margin="@dimen/_16dp"
@@ -16,7 +15,6 @@
         tools:text="Answer answer answer"/>
 
     <TextView
-        android:text="Text"
         android:id="@+id/textViewClue"
         android:layout_margin="@dimen/_16dp"
         android:gravity="center"

@@ -1,13 +1,13 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
-import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsInfo
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.core.ObjectStorage
 
 interface ChosenCardsCache {
 
-    interface Save : com.bbbrrr8877.totalrecall.core.Save<CardsInfo>
+    interface Save : com.bbbrrr8877.totalrecall.core.Save<CardInfo>
 
-    interface Read : com.bbbrrr8877.totalrecall.core.Read<CardsInfo>
+    interface Read : com.bbbrrr8877.totalrecall.core.Read<CardInfo>
 
     interface Mutable : Save, Read
 
@@ -15,8 +15,8 @@ interface ChosenCardsCache {
         private val objectStorage: ObjectStorage.Mutable,
         private val key: String = "ChosenCardCache"
     ) : Mutable {
-        override fun read() = objectStorage.read(key, CardsInfo("", "", "",""))
+        override fun read() = objectStorage.read(key, CardInfo("", "", "",""))
 
-        override fun save(data: CardsInfo) = objectStorage.save(key, data)
+        override fun save(data: CardInfo) = objectStorage.save(key, data)
     }
 }

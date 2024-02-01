@@ -1,11 +1,11 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
 import android.util.Log
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.Query
@@ -16,7 +16,7 @@ import kotlin.coroutines.suspendCoroutine
 
 interface CardsListCloudDataSource : InitialReloadCallback {
 
-    suspend fun cards(): List<CardsList>
+    suspend fun cards(topicInfo: TopicInfo): List<CardsList>
 
     class Base(
         private val cardsNamesCache: CardsNamesCache.Save,
@@ -40,12 +40,13 @@ interface CardsListCloudDataSource : InitialReloadCallback {
             })
         }
 
-        override suspend fun cards(): List<CardsList> {
+        override suspend fun cards(topicInfo: TopicInfo): List<CardsList> {
             if (!loadedCards) {
+                val topicName = topicInfo.name()
                 val query = provideDatabase.database()
                     .child("cards")
                     .orderByChild("topic")
-                    .equalTo("English")
+                    .equalTo(topicName)
                 val sourceList = HandleCards(query).list()
                 val list = sourceList.map { (id, card) ->
                     CardsList.MyCardsList(

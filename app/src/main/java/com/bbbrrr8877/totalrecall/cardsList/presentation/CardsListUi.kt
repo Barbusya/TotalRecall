@@ -15,7 +15,7 @@ interface CardsListUi {
         override fun id() = "CardUiProgress"
         override fun orderId() = 0
 
-        override fun map(answer: TextView, clue: TextView) = Unit
+        override fun map(tvAnswer: TextView, tvClue: TextView) = Unit
 
     }
 
@@ -23,7 +23,7 @@ interface CardsListUi {
         private val key: String,
         private val answer: String,
         private val clue: String,
-        private val topicName: String = ""
+        private val topic: String = ""
     ) : CardsListUi {
         override fun id() = key
         override fun orderId() = 2
@@ -57,9 +57,9 @@ interface CardsListUi {
 
 }
 
-data class CardsInfo(
+data class CardInfo(
     private val id: String,
     private val answer: String,
     private val clue: String,
-    private val image: String = ""
+    private val topic: String = ""
 )

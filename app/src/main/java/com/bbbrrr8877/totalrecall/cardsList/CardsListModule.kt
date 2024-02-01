@@ -8,6 +8,7 @@ import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsListCommunication
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsListViewModel
 import com.bbbrrr8877.totalrecall.core.Core
 import com.bbbrrr8877.totalrecall.core.Module
+import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
 
 class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
 
@@ -16,6 +17,7 @@ class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
         core.provideDispatchersList(),
         CardsListRepository.Base(
             ChosenCardsCache.Base(core.storage()),
+            ChosenTopicCache.Base(core.storage()),
             CardsListCloudDataSource.Base(
                 CardsNamesCache.Base(core.storage()),
                 core
