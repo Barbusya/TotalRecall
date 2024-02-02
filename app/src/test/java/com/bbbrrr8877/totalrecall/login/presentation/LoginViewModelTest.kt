@@ -6,9 +6,7 @@ import com.bbbrrr8877.totalrecall.FakeNavigationCommunication
 import com.bbbrrr8877.totalrecall.FunctionsCallsStack
 import com.bbbrrr8877.totalrecall.login.data.LoginRepository
 import com.bbbrrr8877.totalrecall.login.data.LoginResult
-import com.bbbrrr8877.totalrecall.main.NavigationCommunication
-import com.bbbrrr8877.totalrecall.main.Screen
-import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
+import com.bbbrrr8877.totalrecall.topics.presentation.TopicsListScreen
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import org.junit.Assert.assertEquals
@@ -74,7 +72,7 @@ class LoginViewModelTest {
 
         loginViewModel.handleResult(FakeAuthResultWrapper.Successful)
         repository.checkHandleResultCall(FakeAuthResultWrapper.Successful)
-        navigation.check(ProfileScreen)
+        navigation.check(TopicsListScreen)
 
         functionsCallsStack.checkStack(3)
     }
@@ -153,9 +151,9 @@ class LoginViewModelTest {
             private val list = mutableListOf<LoginUiState>()
             private var index = 0
 
-            override fun map(source: LoginUiState) {
+            override fun map(data: LoginUiState) {
                 functionCallsStack.put(MAP_CALL)
-                list.add(source)
+                list.add(data)
             }
 
             override fun check(state: LoginUiState) {
