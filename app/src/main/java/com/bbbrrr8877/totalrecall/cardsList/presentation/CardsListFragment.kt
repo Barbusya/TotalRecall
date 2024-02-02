@@ -21,7 +21,7 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.faragment_ca
         view.findViewById<View>(R.id.backToTopicsButton).setOnClickListener {
             viewModel.goBack()
         }
-        view.findViewById<View>(R.id.createButton).setOnClickListener {
+        view.findViewById<View>(R.id.createTopicButton).setOnClickListener {
             viewModel.create()
         }
 

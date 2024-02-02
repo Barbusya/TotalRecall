@@ -2,13 +2,12 @@ package com.bbbrrr8877.totalrecall.createCard.presentation
 
 import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
 import com.google.android.material.textfield.TextInputLayout
 
 interface CreateCardUiState {
 
     fun show(
-        progressBar: ProgressBar,
+        progressBar: View,
         createButton: Button,
         answerTextInputLayout: TextInputLayout,
         clueTextInputLayout: TextInputLayout
@@ -20,7 +19,7 @@ interface CreateCardUiState {
         private val error: String = ""
     ) : CreateCardUiState {
         override fun show(
-            progressBar: ProgressBar,
+            progressBar: View,
             createButton: Button,
             answerTextInputLayout: TextInputLayout,
             clueTextInputLayout: TextInputLayout
@@ -31,6 +30,10 @@ interface CreateCardUiState {
             answerTextInputLayout.isErrorEnabled = error.isNotEmpty()
         }
     }
+
+    object CanCreateCard : Abstract (false, true)
+
+    object CanNotCreateCard : Abstract(false, false)
 
     object Progress : Abstract(true, false)
 

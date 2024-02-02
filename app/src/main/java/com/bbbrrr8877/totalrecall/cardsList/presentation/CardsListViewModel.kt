@@ -10,6 +10,7 @@ import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.GoBack
 import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.core.ShowProfile
+import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
@@ -44,7 +45,7 @@ class CardsListViewModel(
 
     override fun showProfile() = navigation.map(ProfileScreen)
 
-    override fun create() = Unit
+    override fun create() = navigation.map(CreateCardScreen)
 }
 
 interface CardsListViewModelActions : Init, Communication.Observe<CardsListUiState>,

@@ -3,6 +3,8 @@ package com.bbbrrr8877.totalrecall.core
 import androidx.lifecycle.ViewModel
 import com.bbbrrr8877.totalrecall.cardsList.CardsListModule
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardsListViewModel
+import com.bbbrrr8877.totalrecall.createCard.CreateCardModule
+import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardViewModel
 import com.bbbrrr8877.totalrecall.createTopics.CreateTopicsModule
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsViewModel
 import com.bbbrrr8877.totalrecall.login.LoginModule
@@ -34,6 +36,7 @@ interface DependencyContainer {
             TopicsViewModel::class.java -> TopicsModule(core)
             CreateTopicsViewModel::class.java -> CreateTopicsModule(core)
             CardsListViewModel::class.java -> CardsListModule(core)
+            CreateCardViewModel::class.java -> CreateCardModule(core)
             else -> dependencyContainer.module(className)
         }
     }

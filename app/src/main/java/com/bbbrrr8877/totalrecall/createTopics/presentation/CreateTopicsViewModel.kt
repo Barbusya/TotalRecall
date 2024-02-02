@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
+import com.bbbrrr8877.totalrecall.core.CreateUiActions
 import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.core.GoBack
 import com.bbbrrr8877.totalrecall.core.ManageResource
@@ -30,7 +31,7 @@ class CreateTopicsViewModel(
         communication.observe(owner, observer)
     }
 
-    override fun checkTopic(name: String) = communication.map(
+    override fun checkText(name: String) = communication.map(
         if (repository.contains(name))
             CreateTopicUiState.TopicAlreadyExists(manageResource.string(R.string.topic_already_exists))
         else
@@ -45,11 +46,7 @@ class CreateTopicsViewModel(
     }
 }
 
-interface CreateTopicActions : CreateTopicUiActions, GoBack, Communication.Observe<CreateTopicUiState> {
+interface CreateTopicActions : CreateUiActions, GoBack, Communication.Observe<CreateTopicUiState> {
     fun createTopic(name: String)
 }
 
-interface CreateTopicUiActions {
-    fun checkTopic(name: String)
-    fun disableCreate()
-}

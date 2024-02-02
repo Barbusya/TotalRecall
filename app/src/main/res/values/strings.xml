@@ -7,18 +7,22 @@
     <string name="profile">Profile</string>
     <string name="login">Login</string>
     <string name="add_new_topic_description">Add new topic</string>
+    <string name="settings_button_description">Settings</string>
     <string name="topics">Topics</string>
     <string name="your_topic">Your topic</string>
     <string name="no_topics_hint">You have not created topics yet. Go ahead</string>
     <string name="no_cards_hint">You have not created cards yet. Go ahead</string>
     <string name="retry">Retry</string>
     <string name="create">Create</string>
-    <string name="back">Back\n</string>
+    <string name="back">Back</string>
     <string name="create_topic">Create Topic</string>
     <string name="topic_name">Topic name</string>
+    <string name="card_answer">Card answer</string>
+    <string name="card_clue">Card clue</string>
     <string name="at_least_1_symbols">At least 1 symbols</string>
     <string name="topic_already_exists">Topic already exists</string>
     <string name="cards">Cards</string>
     <string name="try_again_later">Try again later</string>
     <string name="got_it">Got it</string>
+    <string name="create_card">Create Card</string>
 </resources>

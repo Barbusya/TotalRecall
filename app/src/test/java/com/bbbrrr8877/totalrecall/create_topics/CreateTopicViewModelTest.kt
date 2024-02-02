@@ -49,7 +49,7 @@ class CreateTopicViewModelTest {
         repository.initWithCreateTopicResult(CreateTopicResult.Success)
 
         val topicName = "Topic Name"
-        viewModel.checkTopic(name = topicName)
+        viewModel.checkText(name = topicName)
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.CanCreateTopic)
 
@@ -66,7 +66,7 @@ class CreateTopicViewModelTest {
         repository.initWithCreateTopicResult(CreateTopicResult.Failed(errorMessage = "network problem"))
 
         val topicName = "Topic Name"
-        viewModel.checkTopic(name = topicName)
+        viewModel.checkText(name = topicName)
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.CanCreateTopic)
 
@@ -83,7 +83,7 @@ class CreateTopicViewModelTest {
         repository.initWithExistingTopic(listOf(topicName))
         repository.initWithCreateTopicResult(CreateTopicResult.Success)
 
-        viewModel.checkTopic(name = topicName)
+        viewModel.checkText(name = topicName)
         repository.checkContainsCalled(value = topicName)
         communication.check(CreateTopicUiState.TopicAlreadyExists("topic already exists"))
         functionsCallsStack.checkStack(2)

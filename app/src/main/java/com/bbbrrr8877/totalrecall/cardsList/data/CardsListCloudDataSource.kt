@@ -1,7 +1,6 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
 import android.util.Log
-import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
@@ -19,7 +18,6 @@ interface CardsListCloudDataSource : InitialReloadCallback {
     suspend fun cards(topicInfo: TopicInfo): List<CardsList>
 
     class Base(
-        private val cardsNamesCache: CardsNamesCache.Save,
         private val provideDatabase: ProvideDatabase
     ) : CardsListCloudDataSource {
 
@@ -53,7 +51,7 @@ interface CardsListCloudDataSource : InitialReloadCallback {
                         key = id,
                         answer = card.answer,
                         clue = card.clue,
-                        topicName = card.topicName
+                        topicName = card.topic
                     )
                 }
                 cardsList.addAll(list)
@@ -89,6 +87,6 @@ private class HandleCards(private val query: Query) {
 data class CardCloud(
     val answer: String = "",
     val clue: String = "",
-    val topicName: String = ""
+    val topic: String = ""
 )
 

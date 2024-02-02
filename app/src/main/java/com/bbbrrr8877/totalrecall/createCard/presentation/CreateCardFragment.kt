@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall.createTopics.presentation
+package com.bbbrrr8877.totalrecall.createCard.presentation
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,34 +11,43 @@ import com.bbbrrr8877.totalrecall.core.CreateUiActions
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class CreateTopicFragment : BaseFragment<CreateTopicsViewModel>(R.layout.fragment_create_topic) {
 
-    override val viewModelClass = CreateTopicsViewModel::class.java
+class CreateCardFragment : BaseFragment<CreateCardViewModel>(R.layout.fragment_create_card) {
+
+    override val viewModelClass = CreateCardViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backButton = view.findViewById<View>(R.id.backButton)
+        val backButton = view.findViewById<View>(R.id.backToCardsButton)
         val progressBar = view.findViewById<View>(R.id.progressBar)
-        val createButton = view.findViewById<Button>(R.id.createTopicButton)
-        val textInputLayout = view.findViewById<TextInputLayout>(R.id.createTopicInputLayout)
-        val textInputEditText = view.findViewById<TextInputEditText>(R.id.createTopicEditText)
+        val createButton = view.findViewById<Button>(R.id.createCardButton)
+        val answerInputLayout = view.findViewById<TextInputLayout>(R.id.createCardAnswerInputLayout)
+        val answerInputEditText =
+            view.findViewById<TextInputEditText>(R.id.createCardAnswerEditText)
+        val clueInputLayout = view.findViewById<TextInputLayout>(R.id.createCardClueInputLayout)
+        val clueInputEditText = view.findViewById<TextInputEditText>(R.id.createCardClueEditText)
 
-        textInputEditText.addTextChangedListener(CreateTopicTextWatcher(viewModel))
+        answerInputEditText.addTextChangedListener(CreateCardTextWatcher(viewModel))
 
         backButton.setOnClickListener {
             viewModel.goBack()
         }
+
         createButton.setOnClickListener {
-            viewModel.createTopic(textInputEditText.text.toString())
+            viewModel.createCard(
+                answerInputEditText.text.toString(),
+                clueInputEditText.text.toString()
+            )
         }
+
         viewModel.observe(this) {
-            it.show(progressBar, createButton, textInputLayout)
+            it.show(progressBar, createButton, answerInputLayout, clueInputLayout)
         }
     }
 }
 
-private class CreateTopicTextWatcher(
+private class CreateCardTextWatcher(
     private val actions: CreateUiActions
 ) : SimpleTextWatcher() {
 
@@ -49,7 +58,6 @@ private class CreateTopicTextWatcher(
         else
             disableCreate()
     }
-
     companion object {
         private const val minimumLength: Int = 1
     }

@@ -18,7 +18,7 @@ class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topic
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
             viewModel.showProfile()
         }
-        view.findViewById<View>(R.id.createButton).setOnClickListener {
+        view.findViewById<View>(R.id.createTopicButton).setOnClickListener {
             viewModel.create()
         }
 
