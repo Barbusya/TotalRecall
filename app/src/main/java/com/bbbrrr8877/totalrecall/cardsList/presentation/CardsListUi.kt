@@ -61,5 +61,6 @@ data class CardInfo(
     private val id: String,
     private val answer: String,
     private val clue: String,
-    private val topic: String = ""
+    private val topic: String = "",
+    private val owner: String
 )

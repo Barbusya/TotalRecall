@@ -4,17 +4,17 @@ import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
 
-interface ProvideDatabase {
+interface ProvideFirebaseDatabase {
 
-    fun database(): DatabaseReference
+    fun cloudDatabase(): DatabaseReference
 
-    class Base : ProvideDatabase {
+    class Base : ProvideFirebaseDatabase {
 
         init {
             Firebase.database(DATABASE_URL).setPersistenceEnabled(false)
         }
 
-        override fun database(): DatabaseReference {
+        override fun cloudDatabase(): DatabaseReference {
             return Firebase.database(DATABASE_URL).reference.root
         }
 

@@ -1,7 +1,7 @@
 package com.bbbrrr8877.totalrecall.createTopics.data
 
-import com.bbbrrr8877.totalrecall.core.ProvideDatabase
-import com.bbbrrr8877.totalrecall.topics.data.TopicsCloud
+import com.bbbrrr8877.totalrecall.core.ProvideFirebaseDatabase
+import com.bbbrrr8877.totalrecall.topics.data.cloud.TopicsCloud
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
@@ -14,11 +14,11 @@ interface CreateTopicsCloudDataSource {
 
     suspend fun createTopic(name: String): TopicInfo
 
-    class Base(private val provideDatabase: ProvideDatabase) : CreateTopicsCloudDataSource {
+    class Base(private val provideDatabase: ProvideFirebaseDatabase) : CreateTopicsCloudDataSource {
 
         override suspend fun createTopic(name: String): TopicInfo {
             val myUid = Firebase.auth.currentUser!!.uid
-            val reference = provideDatabase.database().child("topics").push()
+            val reference = provideDatabase.cloudDatabase().child("topics").push()
             val task = reference.setValue(TopicsCloud(name, myUid))
             handleResult(task)
             return TopicInfo(reference.key!!, name)

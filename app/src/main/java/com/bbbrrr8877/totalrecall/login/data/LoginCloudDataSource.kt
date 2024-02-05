@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.login.data
 
-import com.bbbrrr8877.totalrecall.core.ProvideDatabase
+import com.bbbrrr8877.totalrecall.core.ProvideFirebaseDatabase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -12,7 +12,7 @@ interface LoginCloudDataSource {
 
     suspend fun login()
 
-    class Base(private val provideDatabase: ProvideDatabase) : LoginCloudDataSource {
+    class Base(private val provideDatabase: ProvideFirebaseDatabase) : LoginCloudDataSource {
 
         override suspend fun login() {
             val user = Firebase.auth.currentUser
@@ -23,7 +23,7 @@ interface LoginCloudDataSource {
             if (email.isNullOrEmpty())
                 throw IllegalStateException("problem occurred while getting email")
 
-            val result = provideDatabase.database().child("user")
+            val result = provideDatabase.cloudDatabase().child("user")
                 .child(uid)
                 .setValue(UserProfileCloud(email, displayName))
             handleResult(result)

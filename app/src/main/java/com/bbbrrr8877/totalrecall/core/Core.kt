@@ -6,13 +6,14 @@ import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 
 class Core(context: Context) : ProvideNavigation, ProvideStorage, ProvideManageResource,
-    ProvideDispatchersList, ProvideDatabase {
+    ProvideDispatchersList, ProvideFirebaseDatabase, ProvideLocalDatabase {
 
     init {
         FirebaseApp.initializeApp(context)
     }
 
-    private val provideDatabase = ProvideDatabase.Base()
+    private val provideLocalDatabase = ProvideLocalDatabase.Base(context)
+    private val provideDatabase = ProvideFirebaseDatabase.Base()
     private val manageResource = ManageResource.Base(context)
     private val navigation = NavigationCommunication.Base()
     private val storage = SimpleStorage.Base(
@@ -36,7 +37,9 @@ class Core(context: Context) : ProvideNavigation, ProvideStorage, ProvideManageR
 
     override fun manageResource() = manageResource
 
-    override fun database() = provideDatabase.database()
+    override fun cloudDatabase() = provideDatabase.cloudDatabase()
+
+    override fun roomDatabase() = provideLocalDatabase.roomDatabase()
 
 }
 

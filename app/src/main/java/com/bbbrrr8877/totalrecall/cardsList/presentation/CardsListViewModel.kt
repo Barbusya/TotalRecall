@@ -29,7 +29,7 @@ class CardsListViewModel(
 
     override fun init(firstRun: Boolean) {
         communication.map(CardsListUiState.Progress)
-        cardsListRepository.init(this)
+        handle({ cardsListRepository.init(this) }) {}
     }
 
     override fun reload() {
