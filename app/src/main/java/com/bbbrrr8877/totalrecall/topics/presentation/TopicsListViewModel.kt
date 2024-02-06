@@ -28,8 +28,11 @@ class TopicsViewModel(
     }
 
     override fun init(firstRun: Boolean) {
+        handle({ topicsRepository.init(firstRun) }) {}
         communication.map(TopicsListUiState.Progress)
-        handle({ topicsRepository.init(this) }) {}
+        handle({ topicsRepository.data() }) {
+            communication.map(TopicsListUiState.Base(it))
+        }
     }
 
     override fun error(message: String) = communication.map(TopicsListUiState.Error(message))

@@ -35,8 +35,8 @@ interface LoginRepository {
                             GoogleAuthProvider.getCredential(idToken, null)
                         val signInWithCredential =
                             Firebase.auth.signInWithCredential(firebaseCredential)
-                        val (successfun, errorMessage) = handleInner(signInWithCredential)
-                        if (successfun) {
+                        val (successful, errorMessage) = handleInner(signInWithCredential)
+                        if (successful) {
                             loginCloudDataSource.login()
                             LoginResult.Success
                         } else

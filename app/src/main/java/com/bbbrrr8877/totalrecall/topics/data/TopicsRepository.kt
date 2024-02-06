@@ -1,37 +1,33 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
-import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.Save
 import com.bbbrrr8877.totalrecall.topics.data.cache.TopicsCacheDataSource
-import com.bbbrrr8877.totalrecall.topics.data.cloud.TopicsCloudDataSource
-import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
+import com.bbbrrr8877.totalrecall.topics.data.cloud.BaseCloudDataSource
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 
-interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
+interface TopicsRepository : Save<TopicInfo> {
 
     suspend fun data(): List<TopicList>
+    suspend fun init(firstRun: Boolean)
 
     class Base(
         private val saveTopic: ChosenTopicCache.Save,
-        private val cloudDataSource: TopicsCloudDataSource,
         private val cacheDataSource: TopicsCacheDataSource,
+        private val cloudDataSource: BaseCloudDataSource
     ) : TopicsRepository {
 
-        override suspend fun data() = try {
+        override suspend fun data(): List<TopicList> {
             val list = mutableListOf<TopicList>()
-            val myOwnTopics = cacheDataSource.topics()
-            if (myOwnTopics.isEmpty())
+            val topics = cacheDataSource.topics()
+            if (topics.isEmpty())
                 list.add(TopicList.NoTopicsHint)
             else
-                list.addAll(myOwnTopics)
-            list
-        } catch (e: Exception) {
-            listOf(TopicList.Error(e.message ?: "error"))
+                list.addAll(topics)
+            return list
         }
 
-        override suspend fun init(reload: ReloadWithError) = cloudDataSource.init(reload)
-
         override fun save(data: TopicInfo) = saveTopic.save(data)
+        override suspend fun init(firstRun: Boolean) = cloudDataSource.init(firstRun)
     }
 }
 
