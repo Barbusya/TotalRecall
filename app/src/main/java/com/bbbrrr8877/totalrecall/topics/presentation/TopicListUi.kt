@@ -72,4 +72,5 @@ data class TopicInfo(
     private val name: String,
 ) {
     fun name() = name
+    fun id() = id
 }

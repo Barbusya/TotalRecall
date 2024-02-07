@@ -5,6 +5,8 @@ import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.Query
@@ -25,24 +27,17 @@ interface CardsListCloudDataSource : InitialReloadCallback {
         private var loadedCards = false
 
         override fun init(reload: ReloadWithError) {
-            val query = provideDatabase.database()
-                .child("cards")
-                .orderByChild("topic")
-                .equalTo("English")
-            query.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    reload.reload()
-                }
-
-                override fun onCancelled(error: DatabaseError) = reload.error(error.message)
-            })
+            reload.reload()
         }
 
         override suspend fun cards(topicInfo: TopicInfo): List<CardsList> {
             if (!loadedCards) {
+                val myUserId = Firebase.auth.currentUser!!.uid
                 val topicName = topicInfo.name()
+                val topicId = topicInfo.id()
                 val query = provideDatabase.database()
-                    .child("cards")
+                    .child(myUserId)
+                    .child(topicId)
                     .orderByChild("topic")
                     .equalTo(topicName)
                 val sourceList = HandleCards(query).list()
@@ -87,6 +82,8 @@ private class HandleCards(private val query: Query) {
 data class CardCloud(
     val answer: String = "",
     val clue: String = "",
-    val topic: String = ""
+    val topic: String = "",
+    val order: Int = 0,
+    val date: Long = 0,
 )
 

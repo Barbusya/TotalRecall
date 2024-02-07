@@ -28,26 +28,14 @@ interface TopicsCloudDataSource : InitialReloadCallback {
         private var loadedTopics = false
 
         override fun init(reload: ReloadWithError) {
-            val myUserId = Firebase.auth.currentUser!!.uid
-            val query = provideDatabase.database()
-                .child("topics")
-                .orderByChild("memberId")
-                .equalTo(myUserId)
-            query.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    reload.reload()
-                }
-
-                override fun onCancelled(error: DatabaseError) = reload.error(error.message)
-            })
-
+            reload.reload()
         }
 
         override suspend fun topics(): List<TopicList> {
             if (!loadedTopics) {
                 val myUserId = Firebase.auth.currentUser!!.uid
                 val query = provideDatabase.database()
-                    .child("topics")
+                    .child(myUserId)
                     .orderByChild("owner")
                     .equalTo(myUserId)
                 val sourceList = HandleTopics(query).list()

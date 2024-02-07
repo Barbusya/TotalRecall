@@ -12,7 +12,8 @@ interface CreateCardRepository {
     ) : CreateCardRepository {
         override suspend fun createCard(answer: String, clue: String) = try {
             val topicName = chosenTopicCache.read().name()
-            createCardCloudDataSource.createCard(answer, clue, topicName)
+            val topicId = chosenTopicCache.read().id()
+            createCardCloudDataSource.createCard(topicId, answer, clue, topicName)
             CreateCardResult.Success
         } catch (e: Exception) {
             CreateCardResult.Failed(e.message ?: "error")
