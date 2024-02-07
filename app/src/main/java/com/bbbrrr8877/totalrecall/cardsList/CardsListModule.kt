@@ -1,5 +1,6 @@
 package com.bbbrrr8877.totalrecall.cardsList
 
+import com.bbbrrr8877.totalrecall.LearningOrder
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsListCloudDataSource
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsListRepository
 import com.bbbrrr8877.totalrecall.cardsList.data.ChosenCardCache
@@ -18,9 +19,11 @@ class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
             ChosenCardCache.Base(core.storage()),
             ChosenTopicCache.Base(core.storage()),
             CardsListCloudDataSource.Base(
-                core
-            )
-        ),
+                core,
+                LearningOrder.Base()
+            ),
+
+            ),
         CardsListCommunication.Base()
     )
 }

@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
-import android.util.Log
+import com.bbbrrr8877.totalrecall.LearningOrder
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
@@ -20,7 +20,8 @@ interface CardsListCloudDataSource : InitialReloadCallback {
     suspend fun cards(topicInfo: TopicInfo): List<CardsList>
 
     class Base(
-        private val provideDatabase: ProvideDatabase
+        private val provideDatabase: ProvideDatabase,
+        private val learningOrder: LearningOrder,
     ) : CardsListCloudDataSource {
 
         private val cardsList = mutableListOf<CardsList>()
@@ -41,7 +42,13 @@ interface CardsListCloudDataSource : InitialReloadCallback {
                     .orderByChild("topic")
                     .equalTo(topicName)
                 val sourceList = HandleCards(query).list()
-                val list = sourceList.map { (id, card) ->
+                val filteredList = sourceList.filter { (_, card) ->
+                    learningOrder.calculateOrder(
+                        card.order,
+                        card.date
+                    )
+                }
+                val list = filteredList.map { (id, card) ->
                     CardsList.MyCardsList(
                         key = id,
                         answer = card.answer,
@@ -63,7 +70,6 @@ private class HandleCards(private val query: Query) {
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.children.mapNotNull {
-                    Log.d("Bulat", "Cards data $it")
                     Pair(
                         it.key!!,
                         it.getValue(CardCloud::class.java)!!

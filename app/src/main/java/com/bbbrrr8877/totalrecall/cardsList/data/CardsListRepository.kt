@@ -1,6 +1,5 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
-import android.util.Log
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.Save
@@ -20,7 +19,6 @@ interface CardsListRepository : InitialReloadCallback, Save<CardInfo> {
             val list = mutableListOf<CardsList>()
             val topic = readTopic.read()
             val cards = cloudDataSource.cards(topic)
-            Log.d("Bulat", "Repository list: $cards")
             if (cards.isEmpty())
                 list.add(CardsList.NoCardsHint)
             else
