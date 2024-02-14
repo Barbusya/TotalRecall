@@ -1,6 +1,7 @@
 package com.bbbrrr8877.totalrecall.createCard.data
 
 import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
+import java.util.Calendar
 
 interface CreateCardRepository {
 
@@ -13,7 +14,8 @@ interface CreateCardRepository {
         override suspend fun createCard(answer: String, clue: String) = try {
             val topicName = chosenTopicCache.read().name()
             val topicId = chosenTopicCache.read().id()
-            createCardCloudDataSource.createCard(topicId, answer, clue, topicName)
+            val date = Calendar.getInstance().timeInMillis
+            createCardCloudDataSource.createCard(topicId, answer, clue, topicName, order = 0, date)
             CreateCardResult.Success
         } catch (e: Exception) {
             CreateCardResult.Failed(e.message ?: "error")

@@ -15,7 +15,7 @@ interface ChosenCardCache {
         private val objectStorage: ObjectStorage.Mutable,
         private val key: String = "ChosenCardCache"
     ) : Mutable {
-        override fun read() = objectStorage.read(key, CardInfo("", "", "",""))
+        override fun read() = objectStorage.read(key, CardInfo("", "", "", "", 0, 0))
 
         override fun save(data: CardInfo) = objectStorage.save(key, data)
     }

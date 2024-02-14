@@ -1,6 +1,7 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
-import com.bbbrrr8877.totalrecall.LearningOrder
+import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
+import com.bbbrrr8877.totalrecall.cardsList.presentation.SwipeListener
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
@@ -15,7 +16,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-interface CardsListCloudDataSource : InitialReloadCallback {
+interface CardsListCloudDataSource : InitialReloadCallback, SwipeListener {
 
     suspend fun cards(topicInfo: TopicInfo): List<CardsList>
 
@@ -31,16 +32,48 @@ interface CardsListCloudDataSource : InitialReloadCallback {
             reload.reload()
         }
 
+        override fun learned(cardInfo: CardInfo) {
+            val myUserId = Firebase.auth.currentUser!!.uid
+            var order = cardInfo.order()
+            provideDatabase.database()
+                .child(myUserId)
+                .child(cardInfo.topicId())
+                .child(cardInfo.id())
+                .child("order")
+                .setValue(++order)
+            provideDatabase.database()
+                .child(myUserId)
+                .child(cardInfo.topicId())
+                .child(cardInfo.id())
+                .child("date")
+                .setValue(cardInfo.date())
+        }
+
+        override fun reset(cardInfo: CardInfo) {
+            val myUserId = Firebase.auth.currentUser!!.uid
+            provideDatabase.database()
+                .child(myUserId)
+                .child(cardInfo.topicId())
+                .child(cardInfo.id())
+                .child("order")
+                .setValue(0)
+            provideDatabase.database()
+                .child(myUserId)
+                .child(cardInfo.topicId())
+                .child(cardInfo.id())
+                .child("date")
+                .setValue(cardInfo.date())
+        }
+
         override suspend fun cards(topicInfo: TopicInfo): List<CardsList> {
             if (!loadedCards) {
                 val myUserId = Firebase.auth.currentUser!!.uid
-                val topicName = topicInfo.name()
                 val topicId = topicInfo.id()
                 val query = provideDatabase.database()
                     .child(myUserId)
                     .child(topicId)
-                    .orderByChild("topic")
-                    .equalTo(topicName)
+                    .orderByChild("topicId")
+                    .equalTo(topicId)
                 val sourceList = HandleCards(query).list()
                 val filteredList = sourceList.filter { (_, card) ->
                     learningOrder.calculateOrder(
@@ -53,7 +86,10 @@ interface CardsListCloudDataSource : InitialReloadCallback {
                         key = id,
                         answer = card.answer,
                         clue = card.clue,
-                        topicName = card.topic
+                        topicName = card.topic,
+                        order = card.order,
+                        date = card.date,
+                        topicId = card.topicId
                     )
                 }
                 cardsList.addAll(list)
@@ -91,5 +127,6 @@ data class CardCloud(
     val topic: String = "",
     val order: Int = 0,
     val date: Long = 0,
+    val topicId: String = "",
 )
 

@@ -13,7 +13,8 @@ import com.bbbrrr8877.totalrecall.core.Mapper
 class CardsListAdapter : RecyclerView.Adapter<CardsListViewHolder>(),
     Mapper.Unit<List<CardsListUi>> {
 
-    private val cardsList = mutableListOf<CardsListUi>()
+    val cardsList = mutableListOf<CardsListUi>()
+    val list: List<CardsListUi> = cardsList
 
     override fun getItemViewType(position: Int): Int =
         cardsList[position].orderId()
@@ -23,6 +24,7 @@ class CardsListAdapter : RecyclerView.Adapter<CardsListViewHolder>(),
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_progress, parent, false)
         )
+
         2 -> CardViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_card, parent, false)
@@ -69,6 +71,7 @@ private class CardViewHolder(
     override fun bind(item: CardsListUi) {
         item.map(tvAnswer, tvClue)
     }
+
 }
 
 private class NoCardsHintViewHolder(

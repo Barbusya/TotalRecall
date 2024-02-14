@@ -2,10 +2,14 @@ package com.bbbrrr8877.totalrecall.cardsList.presentation
 
 import android.widget.TextView
 import com.bbbrrr8877.totalrecall.R
+import java.util.Calendar
 
 interface CardsListUi {
 
     fun id(): String
+
+    fun learnedCard(learnedCard: LearnedCard) = Unit
+    fun resetCard(resetCard: ResetCard) = Unit
 
     fun orderId(): Int
 
@@ -23,10 +27,21 @@ interface CardsListUi {
         private val key: String,
         private val answer: String,
         private val clue: String,
-        private val topic: String = ""
+        private val topic: String = "",
+        private val learnOrder: Int = 0,
+        private val date: Long = 0,
+        private val topicId: String = "",
     ) : CardsListUi {
         override fun id() = key
         override fun orderId() = 2
+
+        override fun learnedCard(learnedCard: LearnedCard) {
+            learnedCard.learned(CardInfo(key, answer, clue, topic, learnOrder, date, topicId))
+        }
+
+        override fun resetCard(resetCard: ResetCard) {
+            resetCard.reset(CardInfo(key, answer, clue, topic, learnOrder, date, topicId))
+        }
 
         override fun map(tvAnswer: TextView, tvClue: TextView) {
             tvAnswer.text = answer
@@ -61,5 +76,13 @@ data class CardInfo(
     private val id: String,
     private val answer: String,
     private val clue: String,
-    private val topic: String = ""
-)
+    private val topic: String = "",
+    private val order: Int = 0,
+    private val date: Long,
+    private val topicId: String = "",
+) {
+    fun topicId() = topicId
+    fun id() = id
+    fun order() = order
+    fun date() = Calendar.getInstance().timeInMillis
+}

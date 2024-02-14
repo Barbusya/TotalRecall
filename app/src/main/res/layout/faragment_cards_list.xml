@@ -40,11 +40,11 @@
     </androidx.appcompat.widget.Toolbar>
 
     <Button
-        android:id="@+id/got_it"
+        android:id="@+id/try_again_later"
         android:layout_width="100pt"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/got_it" />
+        android:text="@string/try_again_later" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cardsRecyclerView"
@@ -56,14 +56,12 @@
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-
     <Button
-        android:id="@+id/try_again_later"
+        android:id="@+id/got_it"
         android:layout_width="100pt"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/try_again_later" />
-
+        android:text="@string/got_it" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createTopicButton"

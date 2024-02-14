@@ -1,12 +1,13 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
+import com.bbbrrr8877.totalrecall.cardsList.presentation.SwipeListener
 import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.Save
 import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
 import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 
-interface CardsListRepository : InitialReloadCallback, Save<CardInfo> {
+interface CardsListRepository : InitialReloadCallback, Save<CardInfo>, SwipeListener {
 
     suspend fun data(): List<CardsList>
 
@@ -31,5 +32,9 @@ interface CardsListRepository : InitialReloadCallback, Save<CardInfo> {
         override fun init(reload: ReloadWithError) = cloudDataSource.init(reload)
 
         override fun save(data: CardInfo) = saveCards.save(data)
+        override fun learned(cardInfo: CardInfo) = cloudDataSource.learned(cardInfo)
+        override fun reset(cardInfo: CardInfo) = cloudDataSource.reset(cardInfo)
+
+
     }
 }

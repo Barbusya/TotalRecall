@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall
+package com.bbbrrr8877.totalrecall.cardsList.data
 
 import android.util.Log
 import java.util.Calendar

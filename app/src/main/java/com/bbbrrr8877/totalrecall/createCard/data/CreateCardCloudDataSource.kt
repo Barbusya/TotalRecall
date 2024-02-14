@@ -12,20 +12,29 @@ import kotlin.coroutines.suspendCoroutine
 
 interface CreateCardCloudDataSource {
 
-    suspend fun createCard(topicId: String, answer: String, clue: String, topic: String): CardInfo
+    suspend fun createCard(
+        topicId: String,
+        answer: String,
+        clue: String,
+        topic: String,
+        order: Int,
+        date: Long,
+    ): CardInfo
 
     class Base(private val provideDatabase: ProvideDatabase) : CreateCardCloudDataSource {
         override suspend fun createCard(
             topicId: String,
             answer: String,
             clue: String,
-            topic: String
+            topic: String,
+            order: Int,
+            date: Long,
         ): CardInfo {
             val myUid = Firebase.auth.currentUser!!.uid
             val reference = provideDatabase.database().child(myUid).child(topicId).push()
-            val task = reference.setValue(CardCloud(answer, clue, topic))
+            val task = reference.setValue(CardCloud(answer, clue, topic, order, date, topicId))
             handleResult(task)
-            return CardInfo(reference.key!!, answer, clue, topic)
+            return CardInfo(reference.key!!, answer, clue, topic, order, date, topicId)
         }
 
         private suspend fun handleResult(value: Task<Void>): Unit =

@@ -10,9 +10,12 @@ interface CardsList {
         private val key: String,
         private val answer: String,
         private val clue: String,
-        private val topicName: String = ""
+        private val topicName: String = "",
+        private val order: Int = 0,
+        private val date: Long = 0,
+        private val topicId: String = "",
     ) : CardsList {
-        override fun toUi() = CardsListUi.Card(key, answer, clue, topicName)
+        override fun toUi() = CardsListUi.Card(key, answer, clue, topicName, order, date, topicId)
     }
 
     object NoCardsHint : CardsList {

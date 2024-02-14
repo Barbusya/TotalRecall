@@ -38,15 +38,33 @@ class CardsListViewModel(
         }
     }
 
-
     override fun goBack() = navigation.map(TopicsListScreen)
+
+    override fun reset(cardInfo: CardInfo) {
+        handle({ cardsListRepository.reset(cardInfo) }) {}
+    }
+
+    override fun learned(cardInfo: CardInfo) {
+        handle({ cardsListRepository.learned(cardInfo) }) {}
+    }
 
     override fun error(message: String) = communication.map(CardsListUiState.Error(message))
 
     override fun showProfile() = navigation.map(ProfileScreen)
 
     override fun create() = navigation.map(CreateCardScreen)
+
 }
 
 interface CardsListViewModelActions : Init, Communication.Observe<CardsListUiState>,
-    ReloadWithError, ShowProfile, Create, GoBack
+    ReloadWithError, ShowProfile, Create, GoBack, SwipeListener
+
+interface SwipeListener : LearnedCard, ResetCard
+
+interface LearnedCard {
+    fun learned(cardInfo: CardInfo)
+}
+
+interface ResetCard {
+    fun reset(cardInfo: CardInfo)
+}
