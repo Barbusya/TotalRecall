@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.profile.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.core.GoBack
@@ -17,8 +15,7 @@ class ProfileViewModel(
     private val navigationCommunication: NavigationCommunication.Update
 ) : ViewModel(), Init, Communication.Observe<ProfileUiState>, GoBack {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<ProfileUiState>) =
-        communication.observe(owner, observer)
+    override fun liveData() = communication.liveData()
 
     fun signOut() {
         Firebase.auth.signOut()

@@ -19,7 +19,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(R.layout.fragment_profile
         view.findViewById<View>(R.id.backButton).setOnClickListener {
             viewModel.goBack()
         }
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.show(textView)
         }
         viewModel.init(savedInstanceState == null)

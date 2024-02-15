@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.createCard.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
@@ -18,9 +16,7 @@ class CreateCardViewModel(
     dispatchersList: DispatchersList
 ) : BaseViewModel(dispatchersList), CreateCardActions {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<CreateCardUiState>) {
-        communication.observe(owner, observer)
-    }
+    override fun liveData() = communication.liveData()
 
     override fun goBack() = navigation.map(CardListScreen)
 

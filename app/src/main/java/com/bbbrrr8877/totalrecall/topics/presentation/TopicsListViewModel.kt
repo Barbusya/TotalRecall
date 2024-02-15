@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.topics.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
@@ -23,9 +21,7 @@ class TopicsViewModel(
     private val communication: TopicsListCommunication,
 ) : BaseViewModel(dispatchersList), TopicsViewModelActions {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<TopicsListUiState>) {
-        communication.observe(owner, observer)
-    }
+    override fun liveData() = communication.liveData()
 
     override fun init(firstRun: Boolean) {
         communication.map(TopicsListUiState.Progress)

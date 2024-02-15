@@ -5,9 +5,9 @@ import android.text.Editable
 import android.view.View
 import android.widget.Button
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
 import com.bbbrrr8877.totalrecall.core.BaseFragment
 import com.bbbrrr8877.totalrecall.core.CreateUiActions
+import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -41,7 +41,7 @@ class CreateCardFragment : BaseFragment<CreateCardViewModel>(R.layout.fragment_c
             )
         }
 
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.show(progressBar, createButton, answerInputLayout, clueInputLayout)
         }
     }

@@ -22,7 +22,7 @@ class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topic
             viewModel.create()
         }
 
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.show(adapter)
         }
 

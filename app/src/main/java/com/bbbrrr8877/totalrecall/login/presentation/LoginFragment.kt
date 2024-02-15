@@ -23,7 +23,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
         val errorTextView = view.findViewById<TextView>(R.id.errorTextView)
         val loginButton = view.findViewById<View>(R.id.loginButton)
 
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.handle(authResult, requireActivity())
             it.update(loginButton, progressBar, errorTextView)
         }

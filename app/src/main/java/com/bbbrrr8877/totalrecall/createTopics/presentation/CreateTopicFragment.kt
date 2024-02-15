@@ -5,9 +5,9 @@ import android.text.Editable
 import android.view.View
 import android.widget.Button
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
 import com.bbbrrr8877.totalrecall.core.BaseFragment
 import com.bbbrrr8877.totalrecall.core.CreateUiActions
+import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -32,7 +32,7 @@ class CreateTopicFragment : BaseFragment<CreateTopicsViewModel>(R.layout.fragmen
         createButton.setOnClickListener {
             viewModel.createTopic(textInputEditText.text.toString())
         }
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.show(progressBar, createButton, textInputLayout)
         }
     }

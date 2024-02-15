@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.createTopics.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
@@ -27,9 +25,7 @@ class CreateTopicsViewModel(
 
     override fun goBack() = navigation.map(TopicsListScreen)
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<CreateTopicUiState>) {
-        communication.observe(owner, observer)
-    }
+    override fun liveData() = communication.liveData()
 
     override fun checkText(name: String) = communication.map(
         if (repository.contains(name))

@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.login.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.core.DispatchersList
@@ -18,9 +16,7 @@ class LoginViewModel(
     private val navigation: NavigationCommunication.Update,
 ) : BaseViewModel(dispatcherList), Init, Communication.Observe<LoginUiState> {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<LoginUiState>) {
-        communication.observe(owner, observer)
-    }
+    override fun liveData() = communication.liveData()
 
     override fun init(firstRun: Boolean) {
         if (firstRun) {
