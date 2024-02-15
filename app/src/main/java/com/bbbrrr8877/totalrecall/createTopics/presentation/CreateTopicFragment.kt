@@ -2,12 +2,16 @@ package com.bbbrrr8877.totalrecall.createTopics.presentation
 
 import android.os.Bundle
 import android.text.Editable
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseFragment
 import com.bbbrrr8877.totalrecall.core.CreateUiActions
 import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
+import com.bbbrrr8877.totalrecall.databinding.FragmentCreateCardBinding
+import com.bbbrrr8877.totalrecall.databinding.FragmentCreateTopicBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -15,26 +19,37 @@ class CreateTopicFragment : BaseFragment<CreateTopicsViewModel>(R.layout.fragmen
 
     override val viewModelClass = CreateTopicsViewModel::class.java
 
+    private var _binding: FragmentCreateTopicBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCreateTopicBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backButton = view.findViewById<View>(R.id.backButton)
-        val progressBar = view.findViewById<View>(R.id.progressBar)
-        val createButton = view.findViewById<Button>(R.id.createTopicButton)
-        val textInputLayout = view.findViewById<TextInputLayout>(R.id.createTopicInputLayout)
-        val textInputEditText = view.findViewById<TextInputEditText>(R.id.createTopicEditText)
-
-        textInputEditText.addTextChangedListener(CreateTopicTextWatcher(viewModel))
-
-        backButton.setOnClickListener {
-            viewModel.goBack()
+        with(binding) {
+            backButton.setOnClickListener { viewModel.goBack() }
+            createTopicButton.setOnClickListener {  viewModel.createTopic(
+                createTopicEditText.text.toString())
+            }
+            createTopicEditText.addTextChangedListener(CreateTopicTextWatcher(viewModel))
         }
-        createButton.setOnClickListener {
-            viewModel.createTopic(textInputEditText.text.toString())
-        }
+
         viewModel.liveData().observe(viewLifecycleOwner) {
-            it.show(progressBar, createButton, textInputLayout)
+            it.show(binding.progressBar, binding.createTopicButton, binding.createTopicInputLayout)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 
