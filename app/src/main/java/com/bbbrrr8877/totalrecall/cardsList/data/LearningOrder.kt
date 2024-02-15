@@ -5,15 +5,15 @@ import java.util.Calendar
 
 interface LearningOrder {
 
-    fun calculateOrder(order: Int, date: Long): Boolean
+    fun show(order: Int, date: Long): Boolean
 
     class Base : LearningOrder {
         private val currentDate = Calendar.getInstance().timeInMillis
 
-        override fun calculateOrder(order: Int, date: Long): Boolean {
+        override fun show(order: Int, date: Long): Boolean {
             Log.d("Bulat", "Current data: $currentDate")
             return when (order) {
-                0 -> true
+                0 -> currentDate - date >= 0
                 1 -> currentDate - date >= MIN_30
                 2 -> currentDate - date >= DAY_1
                 3 -> currentDate - date >= DAYS_3

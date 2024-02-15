@@ -20,6 +20,7 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.faragment_ca
         cardListAdapter = CardsListAdapter()
         val recyclerView = view.findViewById<RecyclerView>(R.id.cardsRecyclerView)
         recyclerView.adapter = cardListAdapter
+
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
             viewModel.showProfile()
         }
@@ -30,48 +31,30 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.faragment_ca
             viewModel.create()
         }
 
-        viewModel.observe(this) {
+        viewModel.liveData().observe(viewLifecycleOwner) {
             it.show(cardListAdapter)
         }
 
         viewModel.init(savedInstanceState == null)
 
-        initSwipeToLearn(recyclerView)
+        swipeToAction(recyclerView)
+
     }
 
-    private fun initSwipeToLearn(rvCardList: RecyclerView) {
+    private fun swipeToAction(rvCardList: RecyclerView) {
         val itemToLearn = { positionForRemove: Int ->
             val item = cardListAdapter.cardsList[positionForRemove]
             item.learnedCard(viewModel)
-            viewModel.observe(this) {
-                it.show(cardListAdapter)
-            }
         }
         val swipeToLearn = SwipeToLearn(itemToLearn)
         ItemTouchHelper(swipeToLearn).attachToRecyclerView(rvCardList)
-    }
 
-    private fun setupSwipeListener(rvCardList: RecyclerView) {
-        val callback = object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.UP
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ) = false
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = cardListAdapter.list[viewHolder.adapterPosition]
-                item.learnedCard(viewModel)
-            }
+        val itemToReset = { positionForRemove: Int ->
+            val item = cardListAdapter.cardsList[positionForRemove]
+            item.resetCard(viewModel)
         }
-        viewModel.observe(this) {
-            it.show(cardListAdapter)
-        }
-        val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(rvCardList)
+        val swipeToReset = SwipeToReset(itemToReset)
+        ItemTouchHelper(swipeToReset).attachToRecyclerView(rvCardList)
     }
 
     class SwipeToLearn(
@@ -88,6 +71,23 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.faragment_ca
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             itemToLearn(viewHolder.adapterPosition)
+        }
+    }
+
+    class SwipeToReset(
+        val itemToReset: (Int) -> Unit
+    ) : ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.ACTION_STATE_IDLE,
+        ItemTouchHelper.DOWN
+    ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ) = false
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            itemToReset(viewHolder.adapterPosition)
         }
     }
 }

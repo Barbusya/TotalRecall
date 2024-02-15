@@ -25,8 +25,6 @@ interface CardsListCloudDataSource : InitialReloadCallback, SwipeListener {
         private val learningOrder: LearningOrder,
     ) : CardsListCloudDataSource {
 
-        private val cardsList = mutableListOf<CardsList>()
-        private var loadedCards = false
 
         override fun init(reload: ReloadWithError) {
             reload.reload()
@@ -51,6 +49,7 @@ interface CardsListCloudDataSource : InitialReloadCallback, SwipeListener {
 
         override fun reset(cardInfo: CardInfo) {
             val myUserId = Firebase.auth.currentUser!!.uid
+            val resetTime = cardInfo.date() + MIN_10
             provideDatabase.database()
                 .child(myUserId)
                 .child(cardInfo.topicId())
@@ -62,41 +61,41 @@ interface CardsListCloudDataSource : InitialReloadCallback, SwipeListener {
                 .child(cardInfo.topicId())
                 .child(cardInfo.id())
                 .child("date")
-                .setValue(cardInfo.date())
+                .setValue(resetTime)
         }
 
         override suspend fun cards(topicInfo: TopicInfo): List<CardsList> {
-            if (!loadedCards) {
-                val myUserId = Firebase.auth.currentUser!!.uid
-                val topicId = topicInfo.id()
-                val query = provideDatabase.database()
-                    .child(myUserId)
-                    .child(topicId)
-                    .orderByChild("topicId")
-                    .equalTo(topicId)
-                val sourceList = HandleCards(query).list()
-                val filteredList = sourceList.filter { (_, card) ->
-                    learningOrder.calculateOrder(
-                        card.order,
-                        card.date
-                    )
-                }
-                val list = filteredList.map { (id, card) ->
-                    CardsList.MyCardsList(
-                        key = id,
-                        answer = card.answer,
-                        clue = card.clue,
-                        topicName = card.topic,
-                        order = card.order,
-                        date = card.date,
-                        topicId = card.topicId
-                    )
-                }
-                cardsList.addAll(list)
-                loadedCards = true
+            val myUserId = Firebase.auth.currentUser!!.uid
+            val topicId = topicInfo.id()
+            val query = provideDatabase.database()
+                .child(myUserId)
+                .child(topicId)
+                .orderByChild("topicId")
+                .equalTo(topicId)
+            val sourceList = HandleCards(query).list()
+            val filteredList = sourceList.filter { (_, card) ->
+                learningOrder.show(
+                    card.order,
+                    card.date
+                )
             }
-            return cardsList
+            val list = filteredList.map { (id, card) ->
+                CardsList.MyCardsList(
+                    key = id,
+                    answer = card.answer,
+                    clue = card.clue,
+                    topicName = card.topic,
+                    order = card.order,
+                    date = card.date,
+                    topicId = card.topicId
+                )
+            }
+            return list
         }
+    }
+
+    companion object {
+        private const val MIN_10 = 600_000
     }
 }
 

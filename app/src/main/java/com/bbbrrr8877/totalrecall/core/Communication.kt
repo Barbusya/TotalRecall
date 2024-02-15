@@ -2,6 +2,7 @@ package com.bbbrrr8877.totalrecall.core
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
@@ -12,6 +13,8 @@ interface Communication {
 
     interface Observe<T : Any> {
         fun observe(owner: LifecycleOwner, observer: Observer<T>) = Unit
+
+        fun liveData(): LiveData<T> = throw IllegalStateException()
     }
 
     interface Mutable<T : Any> : Update<T>, Observe<T>
@@ -24,9 +27,12 @@ interface Communication {
             liveData.value = data
         }
 
+        @Deprecated("use live data")
         override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
             liveData.observe(owner, observer)
         }
+
+        override fun liveData(): LiveData<T> = liveData
     }
 }
 

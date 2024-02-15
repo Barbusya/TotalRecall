@@ -40,7 +40,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <Button
-        android:id="@+id/try_again_later"
+        android:id="@+id/tryAgainLater"
         android:layout_width="100pt"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -57,7 +57,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <Button
-        android:id="@+id/got_it"
+        android:id="@+id/gotIt"
         android:layout_width="100pt"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -14,7 +14,6 @@ class CardsListAdapter : RecyclerView.Adapter<CardsListViewHolder>(),
     Mapper.Unit<List<CardsListUi>> {
 
     val cardsList = mutableListOf<CardsListUi>()
-    val list: List<CardsListUi> = cardsList
 
     override fun getItemViewType(position: Int): Int =
         cardsList[position].orderId()

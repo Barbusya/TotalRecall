@@ -35,6 +35,5 @@ interface CardsListRepository : InitialReloadCallback, Save<CardInfo>, SwipeList
         override fun learned(cardInfo: CardInfo) = cloudDataSource.learned(cardInfo)
         override fun reset(cardInfo: CardInfo) = cloudDataSource.reset(cardInfo)
 
-
     }
 }

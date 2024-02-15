@@ -1,7 +1,5 @@
 package com.bbbrrr8877.totalrecall.cardsList.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsListRepository
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
@@ -23,9 +21,7 @@ class CardsListViewModel(
     private val communication: CardsListCommunication,
 ) : BaseViewModel(dispatchersList), CardsListViewModelActions {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<CardsListUiState>) {
-        communication.observe(owner, observer)
-    }
+    override fun liveData() = communication.liveData()
 
     override fun init(firstRun: Boolean) {
         communication.map(CardsListUiState.Progress)
@@ -41,11 +37,15 @@ class CardsListViewModel(
     override fun goBack() = navigation.map(TopicsListScreen)
 
     override fun reset(cardInfo: CardInfo) {
-        handle({ cardsListRepository.reset(cardInfo) }) {}
+        handle({ cardsListRepository.reset(cardInfo) }) {
+            reload()
+        }
     }
 
     override fun learned(cardInfo: CardInfo) {
-        handle({ cardsListRepository.learned(cardInfo) }) {}
+        handle({ cardsListRepository.learned(cardInfo) }) {
+            reload()
+        }
     }
 
     override fun error(message: String) = communication.map(CardsListUiState.Error(message))
