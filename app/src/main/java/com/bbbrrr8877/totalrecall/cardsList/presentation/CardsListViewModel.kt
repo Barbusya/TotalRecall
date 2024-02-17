@@ -23,6 +23,8 @@ class CardsListViewModel(
 
     override fun liveData() = communication.liveData()
 
+    override fun toolbarText() = cardsListRepository.toolbarText()
+
     override fun init(firstRun: Boolean) {
         communication.map(CardsListUiState.Progress)
         cardsListRepository.init(this)
@@ -57,7 +59,7 @@ class CardsListViewModel(
 }
 
 interface CardsListViewModelActions : Init, Communication.Observe<CardsListUiState>,
-    ReloadWithError, ShowProfile, Create, GoBack, SwipeListener
+    ReloadWithError, ShowProfile, Create, GoBack, SwipeListener, ToolbarText
 
 interface SwipeListener : LearnedCard, ResetCard
 
@@ -67,4 +69,8 @@ interface LearnedCard {
 
 interface ResetCard {
     fun reset(cardInfo: CardInfo)
+}
+
+interface ToolbarText {
+    fun toolbarText(): String
 }

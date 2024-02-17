@@ -28,6 +28,16 @@
             android:background="@color/design_default_color_on_secondary"
             android:src="@drawable/ic_settings" />
 
+        <ImageButton
+            android:id="@+id/createTopicButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/_16dp"
+            android:contentDescription="@string/add_new_topic_description"
+            android:textAllCaps="true"
+            app:srcCompat="@drawable/ic_add" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,14 +49,4 @@
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createTopicButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/_16dp"
-        android:contentDescription="@string/add_new_topic_description"
-        android:textAllCaps="true"
-        app:srcCompat="@drawable/ic_add" />
 </LinearLayout>

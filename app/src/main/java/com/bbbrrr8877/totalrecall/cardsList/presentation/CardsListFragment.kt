@@ -39,6 +39,7 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.fragment_car
         }
 
         with(binding) {
+            cardsListToolbarTitle.text = viewModel.toolbarText()
             settingsButton.setOnClickListener { viewModel.showProfile() }
             backToTopicsButton.setOnClickListener { viewModel.goBack() }
             createTopicButton.setOnClickListener { viewModel.create() }
