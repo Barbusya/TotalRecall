@@ -31,11 +31,12 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.fragment_car
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cardListAdapter = CardsListAdapter()
+        cardListAdapter = CardsListAdapter(viewModel)
 
         with(binding.cardsRecyclerView) {
             adapter = cardListAdapter
-            swipeToAction(this)
+            swipeToLearn()
+            swipeToReset()
         }
 
         with(binding) {
@@ -53,20 +54,22 @@ class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.fragment_car
 
     }
 
-    private fun swipeToAction(recyclerView: RecyclerView) {
+    private fun swipeToLearn() {
         val itemToLearn = { positionForRemove: Int ->
             val item = cardListAdapter.cardsList[positionForRemove]
             item.learnedCard(viewModel)
         }
         val swipeToLearn = SwipeToLearn(itemToLearn)
-        ItemTouchHelper(swipeToLearn).attachToRecyclerView(recyclerView)
+        ItemTouchHelper(swipeToLearn).attachToRecyclerView(binding.cardsRecyclerView)
+    }
 
+    private fun swipeToReset() {
         val itemToReset = { positionForRemove: Int ->
             val item = cardListAdapter.cardsList[positionForRemove]
             item.resetCard(viewModel)
         }
         val swipeToReset = SwipeToReset(itemToReset)
-        ItemTouchHelper(swipeToReset).attachToRecyclerView(recyclerView)
+        ItemTouchHelper(swipeToReset).attachToRecyclerView(binding.cardsRecyclerView)
     }
 
     class SwipeToLearn(

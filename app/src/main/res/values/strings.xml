@@ -22,7 +22,7 @@
     <string name="at_least_1_symbols">At least 1 symbols</string>
     <string name="topic_already_exists">Topic already exists</string>
     <string name="cards">Cards</string>
-    <string name="try_again_later">Try again later</string>
+    <string name="reset_card">Reset</string>
     <string name="got_it">Got it</string>
     <string name="create_card">Create Card</string>
 </resources>
