@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall
 
-import com.bbbrrr8877.totalrecall.core.DispatchersList
+import com.bbbrrr8877.android.DispatchersList
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 

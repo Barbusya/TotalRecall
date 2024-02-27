@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner
+import com.bbbrrr8877.android.ProvideViewModel
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.ProvideViewModel
 
 class MainActivity : AppCompatActivity(), ProvideViewModel {
 

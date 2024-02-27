@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.bbbrrr8877.android.ProvideViewModel
 
 class App : Application(), ProvideViewModel {
 

@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bbbrrr8877.android.BaseFragment
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.BaseFragment
 import com.bbbrrr8877.totalrecall.databinding.FragmentTopicsBinding
 
 class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topics) {

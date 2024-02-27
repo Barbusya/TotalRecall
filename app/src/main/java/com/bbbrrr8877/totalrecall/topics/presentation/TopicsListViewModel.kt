@@ -1,13 +1,13 @@
 package com.bbbrrr8877.totalrecall.topics.presentation
 
+import com.bbbrrr8877.android.BaseViewModel
+import com.bbbrrr8877.android.DispatchersList
 import com.bbbrrr8877.common.Create
 import com.bbbrrr8877.common.Init
 import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.common.ShowProfile
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
-import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
-import com.bbbrrr8877.totalrecall.core.DispatchersList
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen

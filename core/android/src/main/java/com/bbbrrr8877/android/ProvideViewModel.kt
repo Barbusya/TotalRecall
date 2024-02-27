@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall.core
+package com.bbbrrr8877.android
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner

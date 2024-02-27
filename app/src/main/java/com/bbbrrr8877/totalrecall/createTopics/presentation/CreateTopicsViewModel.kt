@@ -1,12 +1,12 @@
 package com.bbbrrr8877.totalrecall.createTopics.presentation
 
+import com.bbbrrr8877.android.BaseViewModel
+import com.bbbrrr8877.android.DispatchersList
+import com.bbbrrr8877.android.ManageResource
 import com.bbbrrr8877.common.CreateUiActions
 import com.bbbrrr8877.common.GoBack
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
-import com.bbbrrr8877.totalrecall.core.DispatchersList
-import com.bbbrrr8877.totalrecall.core.ManageResource
 import com.bbbrrr8877.totalrecall.createTopics.data.CreateTopicsRepository
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicsListScreen

@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
-import com.bbbrrr8877.totalrecall.core.ObjectStorage
+import com.bbbrrr8877.android.ObjectStorage
 
 interface MyTopicsNamesCache {
 

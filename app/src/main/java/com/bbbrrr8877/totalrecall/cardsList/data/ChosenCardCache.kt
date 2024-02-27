@@ -1,7 +1,7 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
+import com.bbbrrr8877.android.ObjectStorage
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
-import com.bbbrrr8877.totalrecall.core.ObjectStorage
 
 interface ChosenCardCache {
 

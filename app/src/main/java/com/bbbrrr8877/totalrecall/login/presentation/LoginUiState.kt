@@ -5,8 +5,8 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import com.bbbrrr8877.android.ManageResource
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.ManageResource
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 

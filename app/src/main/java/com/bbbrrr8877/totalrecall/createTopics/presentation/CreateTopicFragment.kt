@@ -5,10 +5,10 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bbbrrr8877.android.BaseFragment
+import com.bbbrrr8877.android.SimpleTextWatcher
 import com.bbbrrr8877.common.CreateUiActions
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.BaseFragment
-import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
 import com.bbbrrr8877.totalrecall.databinding.FragmentCreateTopicBinding
 
 class CreateTopicFragment : BaseFragment<CreateTopicsViewModel>(R.layout.fragment_create_topic) {

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.bbbrrr8877.android.BaseFragment
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.BaseFragment
 import com.bbbrrr8877.totalrecall.databinding.FragmentCardsListBinding
 
 class CardsListFragment : BaseFragment<CardsListViewModel>(R.layout.fragment_cards_list) {

@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall.core
+package com.bbbrrr8877.android
 
 import android.text.Editable
 import android.text.TextWatcher
