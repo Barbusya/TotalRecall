@@ -1,9 +1,9 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
 import android.util.Log
-import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
+import com.bbbrrr8877.common.InitialReloadCallback
+import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
-import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot

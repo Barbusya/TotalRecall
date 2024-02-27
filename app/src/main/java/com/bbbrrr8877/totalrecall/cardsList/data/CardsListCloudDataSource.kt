@@ -1,10 +1,10 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
+import com.bbbrrr8877.common.InitialReloadCallback
+import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.cardsList.presentation.SwipeListener
-import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
-import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth

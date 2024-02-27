@@ -1,6 +1,6 @@
 package com.bbbrrr8877.totalrecall.topics.presentation
 
-import com.bbbrrr8877.totalrecall.core.Mapper
+import com.bbbrrr8877.common.Mapper
 import com.bbbrrr8877.totalrecall.topics.data.TopicList
 
 interface TopicsListUiState {

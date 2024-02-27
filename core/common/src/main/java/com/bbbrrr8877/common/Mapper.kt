@@ -1,4 +1,4 @@
-package com.bbbrrr8877.totalrecall.core
+package com.bbbrrr8877.common
 
 interface Mapper<S : Any, R : Any> {
 

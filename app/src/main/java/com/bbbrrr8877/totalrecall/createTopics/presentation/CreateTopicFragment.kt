@@ -5,15 +5,11 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import com.bbbrrr8877.common.CreateUiActions
 import com.bbbrrr8877.totalrecall.R
 import com.bbbrrr8877.totalrecall.core.BaseFragment
-import com.bbbrrr8877.totalrecall.core.CreateUiActions
 import com.bbbrrr8877.totalrecall.core.SimpleTextWatcher
-import com.bbbrrr8877.totalrecall.databinding.FragmentCreateCardBinding
 import com.bbbrrr8877.totalrecall.databinding.FragmentCreateTopicBinding
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class CreateTopicFragment : BaseFragment<CreateTopicsViewModel>(R.layout.fragment_create_topic) {
 

@@ -1,11 +1,11 @@
 package com.bbbrrr8877.totalrecall.createCard.presentation
 
+import com.bbbrrr8877.common.CreateUiActions
+import com.bbbrrr8877.common.GoBack
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
-import com.bbbrrr8877.totalrecall.core.CreateUiActions
 import com.bbbrrr8877.totalrecall.core.DispatchersList
-import com.bbbrrr8877.totalrecall.core.GoBack
 import com.bbbrrr8877.totalrecall.createCard.data.CreateCardRepository
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 

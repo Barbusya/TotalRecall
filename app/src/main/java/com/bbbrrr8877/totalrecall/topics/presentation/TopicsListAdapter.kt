@@ -8,9 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bbbrrr8877.common.Mapper
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.Mapper
-import com.bbbrrr8877.totalrecall.core.Retry
 
 class TopicsListAdapter(
     private val clickListener: TopicsClickListener
@@ -95,7 +94,7 @@ private class NoTopicsHintViewHolder(
 }
 
 private class TopicErrorViewHolder(
-    private val retry: Retry,
+    private val retry: com.bbbrrr8877.common.Retry,
     view: View
 ) : TopicViewHolder(view) {
 
@@ -110,7 +109,7 @@ private class TopicErrorViewHolder(
 }
 
 
-interface TopicsClickListener : Retry, OpenTopic
+interface TopicsClickListener : com.bbbrrr8877.common.Retry, OpenTopic
 
 interface OpenTopic {
     fun openTopic(topicInfo: TopicInfo)

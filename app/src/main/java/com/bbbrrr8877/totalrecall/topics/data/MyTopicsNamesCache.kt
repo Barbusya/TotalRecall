@@ -4,9 +4,9 @@ import com.bbbrrr8877.totalrecall.core.ObjectStorage
 
 interface MyTopicsNamesCache {
 
-    interface Save : com.bbbrrr8877.totalrecall.core.Save<List<String>>
+    interface Save : com.bbbrrr8877.common.Save<List<String>>
 
-    interface Read : com.bbbrrr8877.totalrecall.core.Read<List<String>>
+    interface Read : com.bbbrrr8877.common.Read<List<String>>
 
     interface Mutable : Save, Read
 

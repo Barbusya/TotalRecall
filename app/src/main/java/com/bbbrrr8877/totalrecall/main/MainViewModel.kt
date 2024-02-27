@@ -3,7 +3,7 @@ package com.bbbrrr8877.totalrecall.main
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.bbbrrr8877.totalrecall.core.Init
+import com.bbbrrr8877.common.Init
 import com.bbbrrr8877.totalrecall.login.presentation.LoginScreen
 
 class MainViewModel(

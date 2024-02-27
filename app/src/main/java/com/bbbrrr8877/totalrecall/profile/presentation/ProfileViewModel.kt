@@ -1,9 +1,9 @@
 package com.bbbrrr8877.totalrecall.profile.presentation
 
 import androidx.lifecycle.ViewModel
+import com.bbbrrr8877.common.GoBack
+import com.bbbrrr8877.common.Init
 import com.bbbrrr8877.totalrecall.core.Communication
-import com.bbbrrr8877.totalrecall.core.GoBack
-import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.login.presentation.LoginScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.main.Screen

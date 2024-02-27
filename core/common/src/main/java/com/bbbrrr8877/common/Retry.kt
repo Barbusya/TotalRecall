@@ -1,0 +1,6 @@
+package com.bbbrrr8877.common
+
+interface Retry {
+
+    fun retry()
+}

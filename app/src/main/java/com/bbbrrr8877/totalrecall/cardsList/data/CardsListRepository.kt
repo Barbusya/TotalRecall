@@ -1,12 +1,12 @@
 package com.bbbrrr8877.totalrecall.cardsList.data
 
+import com.bbbrrr8877.common.InitialReloadCallback
+import com.bbbrrr8877.common.ReloadWithError
+import com.bbbrrr8877.common.Save
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardInfo
 import com.bbbrrr8877.totalrecall.cardsList.presentation.SwipeListener
 import com.bbbrrr8877.totalrecall.cardsList.presentation.ToolbarText
-import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
-import com.bbbrrr8877.totalrecall.core.Save
 import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
-import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
 
 interface CardsListRepository : InitialReloadCallback, Save<CardInfo>, SwipeListener, ToolbarText {
 

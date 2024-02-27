@@ -1,11 +1,10 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
-import com.bbbrrr8877.totalrecall.core.InitialReloadCallback
-import com.bbbrrr8877.totalrecall.core.Save
-import com.bbbrrr8877.totalrecall.topics.presentation.ReloadWithError
+import com.bbbrrr8877.common.InitialReloadCallback
+import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 
-interface TopicsRepository : InitialReloadCallback, Save<TopicInfo> {
+interface TopicsRepository : InitialReloadCallback, com.bbbrrr8877.common.Save<TopicInfo> {
 
     suspend fun data(): List<TopicList>
 

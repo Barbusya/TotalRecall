@@ -4,8 +4,8 @@ import com.bbbrrr8877.totalrecall.core.ObjectStorage
 import com.bbbrrr8877.totalrecall.topics.presentation.TopicInfo
 
 interface ChosenTopicCache {
-    interface Save : com.bbbrrr8877.totalrecall.core.Save<TopicInfo>
-    interface Read : com.bbbrrr8877.totalrecall.core.Read<TopicInfo>
+    interface Save : com.bbbrrr8877.common.Save<TopicInfo>
+    interface Read : com.bbbrrr8877.common.Read<TopicInfo>
     interface Mutable : Save, Read
 
     class Base(

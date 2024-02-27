@@ -5,9 +5,9 @@ import com.bbbrrr8877.totalrecall.core.ObjectStorage
 
 interface ChosenCardCache {
 
-    interface Save : com.bbbrrr8877.totalrecall.core.Save<CardInfo>
+    interface Save : com.bbbrrr8877.common.Save<CardInfo>
 
-    interface Read : com.bbbrrr8877.totalrecall.core.Read<CardInfo>
+    interface Read : com.bbbrrr8877.common.Read<CardInfo>
 
     interface Mutable : Save, Read
 

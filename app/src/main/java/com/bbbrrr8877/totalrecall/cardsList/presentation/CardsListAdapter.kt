@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bbbrrr8877.common.Mapper
 import com.bbbrrr8877.totalrecall.R
-import com.bbbrrr8877.totalrecall.core.Mapper
 
 class CardsListAdapter(
     private val swipeListener: SwipeListener

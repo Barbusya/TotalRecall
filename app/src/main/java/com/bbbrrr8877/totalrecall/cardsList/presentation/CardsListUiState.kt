@@ -1,7 +1,7 @@
 package com.bbbrrr8877.totalrecall.cardsList.presentation
 
+import com.bbbrrr8877.common.Mapper
 import com.bbbrrr8877.totalrecall.cardsList.data.CardsList
-import com.bbbrrr8877.totalrecall.core.Mapper
 
 interface CardsListUiState {
 

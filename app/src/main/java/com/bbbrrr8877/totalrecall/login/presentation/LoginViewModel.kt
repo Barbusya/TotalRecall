@@ -1,9 +1,9 @@
 package com.bbbrrr8877.totalrecall.login.presentation
 
+import com.bbbrrr8877.common.Init
 import com.bbbrrr8877.totalrecall.core.BaseViewModel
 import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.core.DispatchersList
-import com.bbbrrr8877.totalrecall.core.Init
 import com.bbbrrr8877.totalrecall.core.ManageResource
 import com.bbbrrr8877.totalrecall.login.data.LoginRepository
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication

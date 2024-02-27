@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "TotalRecall"
 include(":app")
- 
+include(":core:common")
+include(":core:android")

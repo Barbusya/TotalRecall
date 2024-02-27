@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.bbbrrr8877.common.Mapper
 import java.util.concurrent.atomic.AtomicBoolean
 
 interface Communication {

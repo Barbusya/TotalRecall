@@ -10,7 +10,8 @@ interface Screen {
     abstract class Add(private val className: Class<out Fragment>) : Screen {
 
         override fun show(fragmentManager: FragmentManager, containerId: Int) {
-            fragmentManager.beginTransaction().add(containerId, className.newInstance())
+            fragmentManager.beginTransaction()
+                .add(containerId, className.getDeclaredConstructor().newInstance())
                 .addToBackStack(className.simpleName)
                 .commit()
         }
@@ -19,7 +20,7 @@ interface Screen {
     abstract class Replace(private val className: Class<out Fragment>) : Screen {
         override fun show(fragmentManager: FragmentManager, containerId: Int) {
             fragmentManager.beginTransaction()
-                .replace(containerId, className.newInstance())
+                .replace(containerId, className.getDeclaredConstructor().newInstance())
                 .commit()
         }
     }
