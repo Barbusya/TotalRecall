@@ -20,6 +20,8 @@ interface LibraryCloudDataSource : InitialReloadCallback {
     class Base(
         private val provideDatabase: ProvideDatabase
     ) : LibraryCloudDataSource {
+        override fun init(reload: ReloadWithError) = reload.reload()
+
         override suspend fun library(): List<LibraryList> {
             val myUserId = Firebase.auth.currentUser!!.uid
             val query = provideDatabase.database()
@@ -36,8 +38,6 @@ interface LibraryCloudDataSource : InitialReloadCallback {
             }
             return list
         }
-
-        override fun init(reload: ReloadWithError) = reload.reload()
     }
 }
 
@@ -64,5 +64,6 @@ private class HandleLibrary(private val query: Query) {
 
 data class LibraryCloud(
     val name: String = "",
+    val enabled: Boolean = false,
     val description: String = "",
 )

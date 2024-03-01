@@ -1,5 +1,6 @@
 package com.bbbrrr8877.totalrecall.library.presentation
 
+import android.view.View
 import android.widget.TextView
 import com.bbbrrr8877.totalrecall.R
 
@@ -8,12 +9,12 @@ interface LibraryUi {
     fun id(): String
     fun orderId(): Int
     fun load(loadList: LoadList) = Unit
-    fun map(tvName: TextView, tvDescription: TextView)
+    fun map(tvName: TextView, tvDescription: TextView, button: View)
 
     object Progress : LibraryUi {
         override fun id() = "LibraryUiProgress"
         override fun orderId() = 0
-        override fun map(tvName: TextView, tvDescription: TextView) = Unit
+        override fun map(tvName: TextView, tvDescription: TextView, button: View) = Unit
     }
 
     data class LibraryTopic(
@@ -23,8 +24,9 @@ interface LibraryUi {
     ) : LibraryUi {
         override fun id() = key
         override fun orderId() = 2
-        override fun map(tvName: TextView, tvDescription: TextView) {
+        override fun map(tvName: TextView, tvDescription: TextView, button: View) {
             tvName.text = name
+            tvDescription.text = description
         }
 
         override fun load(loadList: LoadList) {
@@ -35,16 +37,20 @@ interface LibraryUi {
     data class Error(private val message: String) : LibraryUi {
         override fun id() = "LibraryUiError$message"
         override fun orderId() = 7
-        override fun map(tvName: TextView, tvDescription: TextView) {
+        override fun map(tvName: TextView, tvDescription: TextView, button: View) {
             tvName.text = message
+            button.visibility = View.GONE
         }
     }
 
     object NoLibraryHint : LibraryUi {
         override fun id() = "LibraryUiNoTopics"
         override fun orderId() = 3
-        override fun map(tvName: TextView, tvDescription: TextView) =
-            tvName.setText(R.string.no_topics_hint)
+        override fun map(tvName: TextView, tvDescription: TextView, button: View) {
+            tvName.setText(R.string.no_libraries_hint)
+            button.visibility = View.GONE
+        }
+
     }
 }
 

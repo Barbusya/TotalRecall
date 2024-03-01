@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/_8dp"
     app:cardCornerRadius="4dp"
     app:cardUseCompatPadding="true">
 
     <TextView
         android:id="@+id/libraryNameTextView"
-        tools:text="English"
-        android:layout_margin="@dimen/_8dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/_8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintBottom_toTopOf="@+id/libraryDescriptionTextView"
+        app:layout_constraintEnd_toStartOf="@+id/loadLibraryButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/libraryDescriptionTextView" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="English" />
 
     <TextView
         android:id="@+id/libraryDescriptionTextView"
-        android:layout_width="match_parent"
-        tools:text="Description"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8dp"
-        app:layout_constraintTop_toBottomOf="@+id/libraryNameTextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/loadLibraryButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/libraryNameTextView"
+        tools:text="Description" />
 
     <ImageButton
         android:id="@+id/loadLibraryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_load"
+        android:contentDescription="@string/load_topic_from_library"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

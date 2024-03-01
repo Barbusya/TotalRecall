@@ -15,7 +15,7 @@ interface LibraryList {
         override fun toUi() = LibraryUi.LibraryTopic(key, name, description)
     }
 
-    object NoTopicsHint : LibraryList {
+    object NoLibraryHint : LibraryList {
         override fun toUi() = LibraryUi.NoLibraryHint
     }
 

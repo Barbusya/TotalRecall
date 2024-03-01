@@ -14,7 +14,7 @@ interface LibraryRepository : InitialReloadCallback {
             val list = mutableListOf<LibraryList>()
             val library = cloudDataSource.library()
             if (library.isEmpty())
-                list.add(LibraryList.NoTopicsHint)
+                list.add(LibraryList.NoLibraryHint)
             else
                 list.addAll(library)
             list

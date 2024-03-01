@@ -3,7 +3,6 @@ package com.bbbrrr8877.totalrecall.library.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +16,10 @@ class LibraryAdapter(
 ) : RecyclerView.Adapter<LibraryViewHolder>(), Mapper.Unit<List<LibraryUi>> {
 
     private val libraryList = mutableListOf<LibraryUi>()
+
+    override fun getItemViewType(position: Int) =
+        libraryList[position].orderId()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
         0 -> LibraryViewHolder(
@@ -71,7 +74,7 @@ private class LibraryItemViewHolder(
     private val description = itemView.findViewById<TextView>(R.id.libraryDescriptionTextView)
     private val loadButton = itemView.findViewById<View>(R.id.loadLibraryButton)
     override fun bind(item: LibraryUi) {
-        item.map(name, description)
+        item.map(name, description, loadButton)
         loadButton.setOnClickListener {
             item.load(loadList)
         }
@@ -83,8 +86,9 @@ private class NoLibraryHintViewHolder(
 ) : LibraryViewHolder(view) {
     private val name = itemView.findViewById<TextView>(R.id.libraryNameTextView)
     private val description = itemView.findViewById<TextView>(R.id.libraryDescriptionTextView)
+    private val loadButton = itemView.findViewById<View>(R.id.loadLibraryButton)
     override fun bind(item: LibraryUi) {
-        item.map(name, description)
+        item.map(name, description, loadButton)
     }
 }
 
@@ -95,9 +99,9 @@ private class LibraryErrorViewHolder(
 
     private val errorTextView = itemView.findViewById<TextView>(R.id.errorRetryTextView)
     private val textView = itemView.findViewById<TextView>(R.id.libraryDescriptionTextView)
-    private val retryButton = itemView.findViewById<Button>(R.id.retryButton)
+    private val retryButton = itemView.findViewById<View>(R.id.retryButton)
     override fun bind(item: LibraryUi) {
-        item.map(errorTextView, textView)
+        item.map(errorTextView, textView, retryButton)
         retryButton.setOnClickListener {
             retry.retry()
         }

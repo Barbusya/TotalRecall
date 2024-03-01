@@ -47,6 +47,7 @@ interface CardsListUi {
         }
 
         override fun map(tvAnswer: TextView, tvClue: TextView, parentView: View) {
+
             tvAnswer.text = answer
             tvAnswer.animate().apply {
                 alpha(0f)
@@ -65,7 +66,7 @@ interface CardsListUi {
             } else {
                 tvAnswer.animate().apply {
                     alpha(0f)
-                    duration = 1000
+                    duration = 500
                 }
                 isShown = false
             }

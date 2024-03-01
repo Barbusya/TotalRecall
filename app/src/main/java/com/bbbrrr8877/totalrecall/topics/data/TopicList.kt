@@ -6,14 +6,6 @@ interface TopicList {
 
     fun toUi(): TopicListUi
 
-    data class OtherTopicList(
-        private val key: String,
-        private val name: String,
-        private val owner: String,
-    ) : TopicList {
-        override fun toUi() = TopicListUi.OtherTopicList(key, name, owner)
-    }
-
     data class MyTopicsList(private val key: String, private val name: String): TopicList {
         override fun toUi() = TopicListUi.MyTopic(key, name)
     }
