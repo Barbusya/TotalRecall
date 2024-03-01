@@ -1,6 +1,5 @@
 package com.bbbrrr8877.totalrecall.topics.data
 
-import android.util.Log
 import com.bbbrrr8877.common.InitialReloadCallback
 import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.totalrecall.core.ProvideDatabase
@@ -27,9 +26,8 @@ interface TopicsCloudDataSource : InitialReloadCallback {
         private val myTopicsCached = mutableListOf<TopicList>()
         private var loadedTopics = false
 
-        override fun init(reload: ReloadWithError) {
-            reload.reload()
-        }
+        override fun init(reload: ReloadWithError) = reload.reload()
+
 
         override suspend fun topics(): List<TopicList> {
             if (!loadedTopics) {
@@ -61,7 +59,6 @@ private class HandleTopics(private val query: Query) {
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.children.mapNotNull {
-                    Log.d("Bulat", "Topics data: $it")
                     Pair(
                         it.key!!,
                         it.getValue(TopicsCloud::class.java)!!

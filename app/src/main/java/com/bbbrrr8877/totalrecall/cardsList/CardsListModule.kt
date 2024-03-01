@@ -12,7 +12,7 @@ import com.bbbrrr8877.totalrecall.topics.data.ChosenTopicCache
 
 class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
 
-    override fun viewModel() = CardsListViewModel (
+    override fun viewModel() = CardsListViewModel(
         core.navigation(),
         core.provideDispatchersList(),
         CardsListRepository.Base(
@@ -22,8 +22,7 @@ class CardsListModule(private val core: Core) : Module<CardsListViewModel> {
                 core,
                 LearningOrder.Base()
             ),
-
-            ),
+        ),
         CardsListCommunication.Base(),
     )
 }

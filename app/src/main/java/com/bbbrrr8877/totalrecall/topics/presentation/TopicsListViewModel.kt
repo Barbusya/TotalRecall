@@ -3,12 +3,14 @@ package com.bbbrrr8877.totalrecall.topics.presentation
 import com.bbbrrr8877.android.BaseViewModel
 import com.bbbrrr8877.android.DispatchersList
 import com.bbbrrr8877.common.Create
+import com.bbbrrr8877.common.GoToLibrary
 import com.bbbrrr8877.common.Init
 import com.bbbrrr8877.common.ReloadWithError
 import com.bbbrrr8877.common.ShowProfile
 import com.bbbrrr8877.totalrecall.cardsList.presentation.CardListScreen
 import com.bbbrrr8877.totalrecall.core.Communication
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicScreen
+import com.bbbrrr8877.totalrecall.library.presentation.LibraryScreen
 import com.bbbrrr8877.totalrecall.main.NavigationCommunication
 import com.bbbrrr8877.totalrecall.profile.presentation.ProfileScreen
 import com.bbbrrr8877.totalrecall.topics.data.TopicsRepository
@@ -46,10 +48,9 @@ class TopicsViewModel(
     }
 
     override fun showProfile() = navigation.map(ProfileScreen)
-
     override fun create() = navigation.map(CreateTopicScreen)
+    override fun goToLibrary() = navigation.map(LibraryScreen)
 }
 
 interface TopicsViewModelActions : Init, Communication.Observe<TopicsListUiState>,
-    TopicsClickListener,
-    ReloadWithError, ShowProfile, Create
+    TopicsClickListener, ReloadWithError, ShowProfile, Create, GoToLibrary

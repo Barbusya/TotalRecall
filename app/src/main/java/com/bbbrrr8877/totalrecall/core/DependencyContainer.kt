@@ -7,6 +7,8 @@ import com.bbbrrr8877.totalrecall.createCard.CreateCardModule
 import com.bbbrrr8877.totalrecall.createCard.presentation.CreateCardViewModel
 import com.bbbrrr8877.totalrecall.createTopics.CreateTopicsModule
 import com.bbbrrr8877.totalrecall.createTopics.presentation.CreateTopicsViewModel
+import com.bbbrrr8877.totalrecall.library.LibraryModule
+import com.bbbrrr8877.totalrecall.library.presentation.LibraryViewModel
 import com.bbbrrr8877.totalrecall.login.LoginModule
 import com.bbbrrr8877.totalrecall.login.presentation.LoginViewModel
 import com.bbbrrr8877.totalrecall.main.MainModule
@@ -37,6 +39,7 @@ interface DependencyContainer {
             CreateTopicsViewModel::class.java -> CreateTopicsModule(core)
             CardsListViewModel::class.java -> CardsListModule(core)
             CreateCardViewModel::class.java -> CreateCardModule(core)
+            LibraryViewModel::class.java -> LibraryModule(core)
             else -> dependencyContainer.module(className)
         }
     }
