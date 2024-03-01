@@ -27,4 +27,5 @@
     <string name="got_it">Got it</string>
     <string name="create_card">Create Card</string>
     <string name="library">Library</string>
+    <string name="load_topic_from_library">Load topic from library</string>
 </resources>
