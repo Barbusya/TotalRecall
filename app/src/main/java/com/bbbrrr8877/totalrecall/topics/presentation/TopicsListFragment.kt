@@ -32,7 +32,6 @@ class TopicsListFragment : BaseFragment<TopicsViewModel>(R.layout.fragment_topic
             topicsRecyclerView.adapter = topicsListAdapter
             settingsButton.setOnClickListener { viewModel.showProfile() }
             createTopicButton.setOnClickListener { viewModel.create() }
-            libraryButton.setOnClickListener { viewModel.goToLibrary() }
         }
 
         viewModel.liveData().observe(viewLifecycleOwner) {

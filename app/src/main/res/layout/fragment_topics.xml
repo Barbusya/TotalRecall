@@ -38,16 +38,6 @@
             android:textAllCaps="true"
             app:srcCompat="@drawable/ic_add" />
 
-        <ImageButton
-            android:id="@+id/libraryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/_4dp"
-            android:contentDescription="@string/add_new_topic_description"
-            android:textAllCaps="true"
-            app:srcCompat="@drawable/ic_library" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
