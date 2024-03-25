@@ -1,0 +1,4 @@
+An application for storing (learning) information (for example, words or phrases in English).
+Authorization via Google account. Firebase.
+To remember something, the user creates a card. There is a hint on one side. The user remembers what is on the other side. He turns it over with a tap on the card and looks at the answer. If he answered correctly, he swipes the card up. If not, then it swipes down. This can also be done using buttons.
+“Incorrect” cards are placed in the “unremembered” pool. And they will be shown again. All cards from all topics go into the “unremembered” pool. The “correct” ones go into the “remembered” pool. And they will disappear into the “forgotten” pool after a certain period. The period is calculated individually. And they are 1 day, 1 week, 1 month, 6 months, 1 year. After a period of one year, the card is moved to the “reserved forever” pool. And they will no longer be shown to the user. But he can move them back himself.
